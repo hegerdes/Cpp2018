@@ -1,0 +1,4 @@
+Das ist ein
+Text
+der verglichen
+werden soll

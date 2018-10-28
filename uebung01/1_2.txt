@@ -1,0 +1,38 @@
+Aufgabe 1.2
+
+Wo liegen unter Linux standardmäßig die vorhandenen Header- und Bibliotheksdateien?
+	Standardmäßig sind diese unter "usr/include" zu finden, es gibt aber weitere oft genutzte Orte,
+	die aber nach Compiler Verion und Konfiguration verschieden seinen können (Wie z.b "/usr/local/include")
+
+Welche Unix-Umgebungsvariablen legen die Pfade fest, in denen gcc nach verfügbaren Header-Dateien und Bibliotheken sucht?
+	gcc -l Für das Linken zu einer Bibliotheksdateien
+	gcc -L Für das Linken in einen Ordner für Bibliotheksdateien
+	gcc -I Für das zeigen auf spezifische Header	 
+
+Erklären  Sie  die  Bedeutung  der gcc-Parameter -I, -L, -l
+	-I dir
+	Fügt das angegebene Verzeichnis dir zu der Liste von Verzeichnissen, in denen nach Header Files gesucht wird, hinzu.
+	-Ldir 
+	Fügt das angegebene Verzeichnis dir zu der Liste von Verzeichnissen, in denen mit -l nach Biblioteken gesucht wird, hinzu.
+	-l library
+	Sucht die Bibliothek names libary beim Linken.
+
+Was ist der Unterschied zwischen #include "header.h" und #include <header.h>?
+	#include "header.h": Für eigene header files
+	#include <header.h>: Für system header files
+
+Erklären Sie den Unterschied zwischen statischem und dynamischen Linken. Wie können Sie statisches Linken erzwingen? Welche Konsequenzen hat das?
+	Statisches Linken
+	Das statische Linken findet einmalig nach der Fertigstellung des Programms statt. Dadurch is das Programm portabel, da es ohne andere 
+	Dateien ausgeführt werden kann, aber benötigt mehr Speicher und muss nach Wartung komplett neu kompiliert werden. 
+	Man kann statische Linken mit -static erzwingen.
+	
+	Dynamisches Linken
+	Das dynamische Linken findet erst zur Laufzeit statt. Dazu verwendet man meistens dynamische Bibliotheken, die später leicht ausgetauscht 
+	werden können. Darum werden die aufrufenden Programme kleiner und der Speicher für die Biblitheken wird nur einmal benötigt, auch wenn 
+	diese mehrmals verwendet werden. Es kommt allerdings zu Problemen wenn nicht die richtige Bibliotheksversion vorliegt.
+
+Welche Informationen liefert Ihnen das Linux-Tool ldd?
+	ldd gibt die von einem Programm benötigten Objekte/Biblioteken zurück. Dabei inspiziert der Linker die dynamischen Abhängigkeiten des 
+	Programms, gibt den Speicherort zurück und lädt diese Objekte.
+	
