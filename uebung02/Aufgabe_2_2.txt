@@ -1,0 +1,40 @@
+﻿a) p = feld;
+    Zulaessig, Felder sind auch nur Zeiger auf die eigentliche Adresse (Beides hat gleichen Typ)
+
+b) feld = p;
+    Compilerfehler:warning: makes integer from pointer 
+    Hier wird versucht ein Feld an Zeigern (bzw. erste stelle) den Wert eines integer zu geben.
+
+
+c) p = &feld[3];
+    Zulaessig, da hier den Inhalt des Pointers, was ein int ist, einer int-variable zugewiesen wird
+
+d) feld[2] = p[5];
+    Zulaessig beim compilieren da beides gleicher Typ, aber eventuell Laufzeitfehler wenn pointer nicht initialisiert wurde.
+
+e) p1 = p2 + i;
+    Zulaessig, aendert aber nicht den Inhalt sondern nur die Adresse auf die p1 zeigt
+
+f) p1 = i + p2;
+    Zulaessig, + wird ueberladen gibt int*. aendert aber nicht den Inhalt sondern nur die Adresse auf die p1 zeigt
+
+g) i = p1 * p2;
+    Unzulaessig, keine Multiplikation auf Pointern:
+    Compilerfehler: error: invalid operands to binary * (have 'int *' and 'int *')
+
+h) i = p1 - p2;
+    Generell Zulaessig, liefert die Entfernung zwischen zwei Zeigern und liefert ein int zurueck
+
+i) i = p1 + p2;
+Nicht Zulaessig, Addition nicht definiert. Ergibt keinen Sinn diese Operation;
+    Compilerfehler: error: invalid operands to binary + (have 'int *' and 'int *')
+
+Erklaeren sie darueber hinaus, wie der [][]-Zugriff bei zweidimensionalen Arrays aussieht:
+    int feld[][] ist quasi ein int Array von einem int array. So liefert feld[0] ein 
+    feld (bzw. Pointer) mit weiteren elementen feld[0][0] ist dann der eigentliche wert
+
+Eine nette Moeglichkeit verwirrenden Programmcode zu generieren ist es, Array-Namen und Index zu vertauschen, d.h. feld[i] stellt denselben Zugriff
+wie i[feld] dar. Warum ist das so?
+    felder sind eigentlich pointer auf die erste stelle eines Objekts, die intern so aussehen: 
+    *(feld + i). So wird einfach nur die Adresse weiter gezaehlt. i[feld] ist geleichbedeutend zu
+    *(i + feld), was aequivalent ist zu *(feld + i)
