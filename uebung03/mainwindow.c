@@ -79,7 +79,8 @@ int createSDLWindow(SDL_Window** mainWindow, SDL_GLContext* mainContext)
 
 void mainLoop(SDL_Window *mainWindow, Model *model)
 {
-	int loop, i, a, b, c, index;
+	int loop = 1;
+	int i, a, b, c, index;
 
 	/* Set camera position and direction */
 	glLoadIdentity();
@@ -106,6 +107,12 @@ void mainLoop(SDL_Window *mainWindow, Model *model)
 			/*++++++++++++++++++++++++++++++++++++++++++*/
 			/* Implement rendering code here!           */
 			/*++++++++++++++++++++++++++++++++++++++++++*/
+
+			glBegin(GL_LINE_LOOP);
+			glVertex3f(model->vertexBuffer[0], model->vertexBuffer[1], model->vertexBuffer[2]);
+			glVertex3f(model->vertexBuffer[20], model->vertexBuffer[8], model->vertexBuffer[27]);
+			glVertex3f(model->vertexBuffer[180], model->vertexBuffer[17], model->vertexBuffer[90]);
+			glEnd();
 
 
 			/* Bring up back buffer */

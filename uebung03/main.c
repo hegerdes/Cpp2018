@@ -36,6 +36,9 @@ int main(int argc, char *argv[])
 	/* TODO: Load data from PLY file into model */
 	/*++++++++++++++++++++++++++++++++++++++++++*/
 
+	loadply("models/arrow.ply", model);
+
+
 	/* Call main rendering loop */
 	mainLoop(mainWindow, model);
 
@@ -45,6 +48,7 @@ int main(int argc, char *argv[])
 	/*++++++++++++++++++++++++++++++++++++++++++*/
 	/* TODO: Free model data                    */
 	/*++++++++++++++++++++++++++++++++++++++++++*/
+	freeModel(model);
 	return 0;
 }
 

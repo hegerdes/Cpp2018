@@ -1,0 +1,50 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/main.c
+mainwindow.h
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/mainwindow.h
+plyio.h
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/plyio.h
+
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/mainwindow.c
+stdio.h
+-
+mainwindow.h
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/mainwindow.h
+
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/mainwindow.h
+GL/glew.h
+-
+SDL2/SDL.h
+-
+model.h
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/model.h
+
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/model.c
+model.h
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/model.h
+stdio.h
+-
+
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/model.h
+
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/plyio.c
+plyio.h
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/plyio.h
+
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/plyio.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+model.h
+/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/model.h
+

@@ -29,4 +29,12 @@
  void loadply(
 		char* file, Model* model);
 
+/**
+ * @brief Frees the allocated moemory of the model
+ * 
+ * @param model		A pointer to a model struct that will be freed
+ * 					after this method
+ */
+ void freeModel(Model* model);
+
 #endif

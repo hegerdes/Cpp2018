@@ -1,0 +1,32 @@
+    while(fgets(buffer, 80, fp)!=NULL && strcmp(buffer, "end_header\n")!=0)
+   	{
+		
+		sscanf(buffer, "element vertex %i", numVertex);
+
+    	sscanf(buffer, "element face %i", numFace);
+     	
+    }
+
+
+    int i;
+	for(i = 0; i < 10; i++)
+	{
+		fgets(buffer,80,fp);
+		printf("OUT: %s", buffer);
+	}
+
+
+			for(i = 0; i < 3* 3 - 2; i += 3)
+	{
+		fgets(buffer, 80, fp);
+		printf("OUT: %s", buffer);
+		if (sscanf(buffer, "%s %s %s\n", &x1, &x2, &x3) != 3||!buffer)
+		{
+			printf("Fehler beim lesen. Buffer: %s", buffer);
+		}
+
+		vertexBuffer[i] = x1;
+		vertexBuffer[i+1] = x2;
+		vertexBuffer[i+2] = x3;
+
+	}
