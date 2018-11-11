@@ -35,7 +35,7 @@ void printBuffers(Model* model)
 
         for(i = 0; i < model->numFaces; i++)
         {
-            printf("F: %d %d %d\n", model->indexBuffer[3 * i],
+            printf("F: %d %d %d\n",model->indexBuffer[3 * i],
                                     model->indexBuffer[3 * i + 1],
                                     model->indexBuffer[3 * i + 2]);
         }

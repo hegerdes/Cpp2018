@@ -1,0 +1,52 @@
+﻿INF-C++ Blatt03
+
+@author Henrik Gerdes, Manuel Eversmeyer
+
+Aufgabe3.1:
+
+Vorteile von CMake:
+Breite Unterstuetzung:		Viele IDEs nutzen es
+
+Plattformunabhaengigkeit:	Anders als Make laeuft CMake auf jedem System, 
+	da es nur C(C++) als Vorraussetzung hat. (Make unterstuetzt Win 
+	offiziell nicht)
+
+Metabuildsystem: 		CMake liefer entweder ein Makefile oder 
+	Buildanweisungen fuer VisualStudio, XCode oder Eclipse und weitere.
+
+Erweiterbarkeit: 		Unterstuetzung von Makros
+
+Anpassbarkeit: 			Unterstuetzung verschiedener Compiler und 
+	waehlt die je nach Dateiendung
+
+Modular/Recursiv:		Man kann CMake anweisen Abhaengigkeiten zu 
+	Bilbliotheken aufzuloesen. Dazu sucht CMake nach weiteren 
+	CMakeLists.txt Dateien und fuehrt diese aus
+
+Wichtige Funktionen:
+Automatisierte Erzeugung von Makefiles und Projekten fuer viele 
+unterschiedliche Entwicklungsumgebungen und Compiler
+Verschiedene Ziele: ReleaseVersion fuer Windows/Linux/Mac, 
+Debug version. Errechtbar mit verschiedenen Flags
+Aufloesen und suchen von Abhaengigkeiten. Kann auf dem 
+Nutzerrechner verschiede Verzeichnisse nach Biblotheken durchsuchen
+
+Aufbau der CMake-Projekte:
+-Minimum CMake Version
+-Projektname
+-Verzeichnisse die gelinkt oder inkludiert werden muessen
+-Pfad in dem nach lokalen cmake modulen gesucht wird
+-Compiler-Flags
+-Suche nach benoetigte Bibliotheken
+-Aufzaehlung der Source-Dateien in einer Variable
+-Erzeugung einer Executeable
+-Abhaengigkeiten von externen Bibliotheken
+
+Unterschied In-Source und Out-of-Source:
+Bei In-Source builds werden die Source-Datei und Executeable-Dateien im 
+selben Verzeichnis gespeichert. Bei Out-Source builds werden die 
+Source-Datei und Executeable-Dateien in seperaten Verzechnissen 
+gespeichert.
+
+In-Source builds haben gegenueber Out-Source builds so gut wie keine 
+Vorteile, daher verwendet man wenn moeglich Out-Source builds.

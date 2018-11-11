@@ -103,17 +103,20 @@ void mainLoop(SDL_Window *mainWindow, Model *model)
 					loop = 0;
 				}
 			}
-
-			/*++++++++++++++++++++++++++++++++++++++++++*/
-			/* Implement rendering code here!           */
-			/*++++++++++++++++++++++++++++++++++++++++++*/
-
-			glBegin(GL_LINE_LOOP);
-			glVertex3f(model->vertexBuffer[0], model->vertexBuffer[1], model->vertexBuffer[2]);
-			glVertex3f(model->vertexBuffer[20], model->vertexBuffer[8], model->vertexBuffer[27]);
-			glVertex3f(model->vertexBuffer[180], model->vertexBuffer[17], model->vertexBuffer[90]);
-			glEnd();
-
+			
+			for(i = 0; i<model->numFaces; i++)
+			{
+				index = i * 3; 
+				a = 3 * model->indexBuffer[index];
+				b = 3 * model->indexBuffer[index+1];
+				c = 3 * model->indexBuffer[index+2];
+				
+				glBegin(GL_LINE_LOOP);
+				glVertex3f(model->vertexBuffer[a], model->vertexBuffer[a+1], model->vertexBuffer[a+2]);
+				glVertex3f(model->vertexBuffer[b], model->vertexBuffer[b+1], model->vertexBuffer[b+2]);
+				glVertex3f(model->vertexBuffer[c], model->vertexBuffer[c+1], model->vertexBuffer[c+2]);
+				glEnd();
+			}
 
 			/* Bring up back buffer */
 			SDL_GL_SwapWindow(mainWindow);

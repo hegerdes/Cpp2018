@@ -1,1 +1,1 @@
-/usr/bin/cc     CMakeFiles/asteroids.dir/mainwindow.c.o CMakeFiles/asteroids.dir/main.c.o CMakeFiles/asteroids.dir/plyio.c.o CMakeFiles/asteroids.dir/model.c.o  -o asteroids -rdynamic -lGLEW -lGLU -lGL 
+/usr/bin/cc     CMakeFiles/asteroids.dir/mainwindow.c.o CMakeFiles/asteroids.dir/main.c.o CMakeFiles/asteroids.dir/plyio.c.o CMakeFiles/asteroids.dir/model.c.o  -o asteroids -rdynamic -lGLEW -lGLU -lGL -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread 

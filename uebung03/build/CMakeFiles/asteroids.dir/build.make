@@ -171,6 +171,8 @@ asteroids: CMakeFiles/asteroids.dir/build.make
 asteroids: /usr/lib/x86_64-linux-gnu/libGLEW.so
 asteroids: /usr/lib/x86_64-linux-gnu/libGLU.so
 asteroids: /usr/lib/x86_64-linux-gnu/libGL.so
+asteroids: /usr/lib/x86_64-linux-gnu/libSDL2main.a
+asteroids: /usr/lib/x86_64-linux-gnu/libSDL2.so
 asteroids: CMakeFiles/asteroids.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/hegerdes/Dropbox/Andere Shares/C++/Blatt03/Henrik/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable asteroids"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/asteroids.dir/link.txt --verbose=$(VERBOSE)
