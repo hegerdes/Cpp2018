@@ -76,6 +76,10 @@ public:
      * @param moveSpeed     Move speed in world units per call
      */
     Camera(Vector position, float turnSpeed, float moveSpeed);
+    /**
+     * @brief Destroys the Camera object
+     */
+    ~Camera();
 
     /**
      * @brief Moves the camera according to given direction

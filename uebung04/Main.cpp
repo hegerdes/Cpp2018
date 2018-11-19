@@ -10,14 +10,21 @@
  */
 
 #include "MainWindow.hpp"
+#include "Camera.hpp"
 
 #include <iostream>
 
 int main(int argc, char** argv)
 {
+
     if (argc == 2)
     {
-	// TODO: BUILD A MAINWINDOW INSTANCE AND CALL EXECUTE
+    std::string buffer = argv[1];
+    //buffer = "../models/arrow.ply";
+	asteroids::MainWindow* modelwindow = new asteroids::MainWindow("Model Render", buffer, 666,500);
+    modelwindow->execute();
+    delete modelwindow;
+
     }
     else
     {
