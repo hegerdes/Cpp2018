@@ -51,11 +51,11 @@ namespace asteroids
 		    case BACKWARD:	m_trans.x -= m_moveSpeed * sin(m_rot.y);
 						    m_trans.z -= m_moveSpeed * cos(m_rot.y);
 						    break;
-		    case LEFT:		m_trans.x -= m_moveSpeed * sin(m_rot.y + 90);
-                            m_trans.z -= m_moveSpeed * sin(m_rot.y );
+		    case LEFT:		m_trans.x -= m_moveSpeed * sin(PH - m_rot.y);
+                            m_trans.z -= m_moveSpeed * cos(PH - m_rot.y);
                             break;
-		    case RIGHT:		m_trans.x += m_moveSpeed * sin(m_rot.y + 90);
-                            m_trans.z += m_moveSpeed * sin(m_rot.y );
+		    case RIGHT:		m_trans.x += m_moveSpeed * sin(PH + m_rot.y);
+                            m_trans.z += m_moveSpeed * cos(PH + m_rot.y);
                             break;
 
 		    case UP:		m_trans.y += m_moveSpeed;break;
@@ -71,7 +71,7 @@ namespace asteroids
         switch (dir) 
         {
             case LEFT:  m_rot.y -= m_turnSpeed; break;
-            case RIGHT: m_rot.y -= m_turnSpeed; break;
+            case RIGHT: m_rot.y += m_turnSpeed; break;
 
             default:    std::cout << "Error: Undefined Label!" << std::endl;
 			    break;
@@ -82,9 +82,9 @@ namespace asteroids
     void Camera::apply()
     {
         /* Calc look at vector based on rotation state */
-        m_l.x = m_initial.x + m_trans.x + sin (m_rot.y);
-        m_l.z = -m_initial.z - m_trans.z - cos (m_rot.y );
-        m_l.y = m_initial.y + m_trans.y + sin (m_rot.x);
+        m_l.x = m_initial.x + m_trans.x + sin(m_rot.y);
+        m_l.z = -m_initial.z - m_trans.z - cos(m_rot.y);
+        m_l.y = m_initial.y + m_trans.y + sin(m_rot.x);
 
         /* Clear matrix stack */
         glLoadIdentity () ;

@@ -27,7 +27,7 @@ MainWindow::MainWindow(
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		
-		printf("Failed to init SDL\n");
+		std::cout << "MainWindow: Unable to create SDL window" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -37,7 +37,7 @@ MainWindow::MainWindow(
 
     if (!mainWindow)
 	{
-		printf("Unable to create window\n");
+		std::cout << "MainWindow: Unable to creade SDL GL context" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -69,10 +69,10 @@ MainWindow::MainWindow(
 
 	/* Init OpenGL projection matrix */
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	float ratio = 1024 * 1.0 / 768;
+	float ratio = width * 1.0 / height;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glViewport(0, 0, 1027, 768);
+	glViewport(0, 0, width, height);
 	gluPerspective(45, ratio, 1, 10000);
 
 	/* Ender model view mode */
@@ -87,6 +87,7 @@ void MainWindow::execute()
 {
 
 	bool loop = true;
+	
 
 	/*TO DO FIX Camera. (applay)*/
 	/* Set camera position and direction */
