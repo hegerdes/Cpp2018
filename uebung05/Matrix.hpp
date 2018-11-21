@@ -50,6 +50,12 @@ public:
 	/// Destructor
     ~Matrix();
 
+	/**
+	 * @brief	Print matrix
+	 * 
+	 */
+	void printMatrix();
+
     
 	/**
 	 * @brief	Returns the internal data array. Unsafe. Will probably
@@ -61,6 +67,9 @@ public:
 
 
 private:
+
+	///Size of array
+	const int MatrixSize = 16;
 
     /// Internal data array
 	float m[16];
