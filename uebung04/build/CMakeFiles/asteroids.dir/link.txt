@@ -1,1 +1,0 @@
-/usr/bin/c++   -O3 -Wall -g -Wall   CMakeFiles/asteroids.dir/Camera.cpp.o CMakeFiles/asteroids.dir/Main.cpp.o CMakeFiles/asteroids.dir/MainWindow.cpp.o CMakeFiles/asteroids.dir/Model.cpp.o CMakeFiles/asteroids.dir/PLYIO.cpp.o  -o asteroids -rdynamic -lGLEW -lGLU -lGL -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread 
