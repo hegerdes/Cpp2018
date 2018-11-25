@@ -63,6 +63,12 @@ public:
 	 * @param w angle
 	 */
 	Quaternion(float* vec, float w);
+
+	/**
+	 * @brief	Copy-constructor
+	 * @param other The other quaterion
+	 */
+	Quaternion(const Quaternion& other);
   
 	/**
 	 * @brief   Calculates a quaternion with a given vector and an angle
@@ -70,6 +76,45 @@ public:
 	 * @param angle angle
 	 */
 	void fromAxis(const Vector& axis, float angle);
+
+	/**
+	 * @brief	Sets a quaternion to this;
+	 * @param rq	The quaternion to set.
+	 */
+	Quaternion& operator=(const Quaternion &rq);
+
+	/**
+	 * @brief	Multiplicats two quaternion and retruns a
+	 * 			new quaternion.
+	 * @param rq	The quaternion to multiplicate with.
+	 */
+	Quaternion operator*(const Quaternion &rq) const;
+
+	/**
+	 * @brief	Multiplicats two quaternion and retruns this 
+	 * 			multiplicated with rq.
+	 * @param rq	The quaternion to multiplicate with.
+	 */
+	Quaternion& operator*=(const Quaternion &rq);
+
+	/**
+	 * @brief	Multiplicaes a quaternion with vector.
+	 * 			Will return a new vector.
+	 * @param vector	The vector to multiplicate with.
+	 */
+    Vector operator*(const Vector &vector) const;
+
+	/**
+	 * @brief	Multiplicaes a quaternion with vector.
+	 * 			Will override vector.
+	 * @param vector	The vector to multiplicate with.
+	 */
+	Vector& operator*=(Vector &vector) const;
+
+	/**
+	 * @brief	Prints the quaternion to stdout;
+	 */
+	void print();
  
 	/// TODO: ADD required operator signatures.
   

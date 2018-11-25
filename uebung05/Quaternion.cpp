@@ -52,6 +52,14 @@ Quaternion::Quaternion(float* vec, float _w)
 	w = _w;
 }
 
+Quaternion::Quaternion(const Quaternion& other)
+{
+	w = other.w;
+	x = other.x;
+	y = other.y;
+	z = other.z;
+}
+
 void Quaternion::fromAxis(const Vector& axis, float angle)
 {
 	float sinAngle;
@@ -69,6 +77,57 @@ void Quaternion::fromAxis(const Vector& axis, float angle)
 	y = (vn.y * sinAngle);
 	z = (vn.z * sinAngle);
 	w = cos(angle);
+}
+
+Quaternion& Quaternion::operator=(const Quaternion &other)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = other.z;
+	this->w = other.w;
+
+	return *this;
+}
+
+Quaternion Quaternion::operator*(const Quaternion& rq)const
+{
+	return Quaternion(	w * rq.x + x * rq.w + y * rq.z - z * rq.y, 
+						w * rq.y + y * rq.w + z * rq.x - x * rq.z, 
+						w * rq.z + z * rq.w + x * rq.y - y * rq.x, 
+						w * rq.w - x * rq.x - y * rq.y - z * rq.z);
+}
+
+Quaternion& Quaternion::operator*=(const Quaternion& rq)
+{
+	*this = *this * rq;
+	return *this;
+}
+
+Vector Quaternion::operator* (const Vector& vector) const 
+{ 
+	Vector vn(vector); 
+	vn.normalize(); 
+	Quaternion vecQuat, resQuat; 
+	vecQuat.x = vn.x; 
+	vecQuat.y = vn.y; 
+	vecQuat.z = vn.z; 
+	vecQuat.w = 0.0f; 
+	
+	resQuat = vecQuat * Quaternion(-x, -y, -z, w); 
+	resQuat = *this * resQuat; 
+	return (Vector(resQuat.x, resQuat.y, resQuat.z)); 
+}
+
+void Quaternion::print()
+{
+	std::cout << "(" << this->x << ", " << this->y << ", " << this->z 
+		<< ", " << this->w << ")" << std::endl;
+}
+
+Vector& Quaternion::operator*=(Vector& vector) const
+{
+	vector = *this * vector;
+	return vector;
 }
 
     

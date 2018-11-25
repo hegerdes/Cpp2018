@@ -90,6 +90,26 @@ void Model::initTransformations()
 
 void Model::rotate(ACTION axis, float s)
 {
+
+	Quaternion qr;
+
+	switch(axis)
+	{
+	case PITCH: qr.fromAxis(m_yAxis, s);
+				m_xAxis = qr * m_xAxis;
+				m_zAxis = qr * m_zAxis; break;
+	
+	case YAW:	qr.fromAxis(m_xAxis, s);
+				m_yAxis = qr * m_yAxis;
+				m_zAxis = qr * m_zAxis;	break;
+
+	case ROLL:	qr.fromAxis(m_zAxis, s);
+				m_yAxis = qr * m_yAxis;
+				m_xAxis = qr * m_xAxis; break;
+	
+	default: std::cout << "Will handel that key later" << std::endl;
+	}
+
 	// TODO: Implement the rotation of the model based on the 
 	// value of axis. Generate a suitable Quaternion that 
 	// represents a rotation by 's' radius around the relevant
@@ -102,6 +122,24 @@ void Model::rotate(ACTION axis, float s)
 
 void Model::move(ACTION axis, float speed)
 {
+
+	switch (axis) 
+	{
+		case ACCEL: 
+			m_position += m_xAxis * speed;
+			break;
+		case STRAFE: 
+			m_position += m_yAxis * speed;
+			break;
+		case LIFT: 
+			m_position += m_zAxis * speed;
+			break;
+		default: 
+			std::cout << "Bewegungsrichtung nicht definiert" << std::endl;
+			break;
+	}
+
+
 	// TODO:
 	// Implement the movement of the model. First, determine the
 	// direction in which the movement has to be done using the
@@ -116,6 +154,26 @@ void Model::move(ACTION axis, float speed)
 
 void Model::computeMatrix()
 {
+
+	float* matrix_trans = m_transformation.getData();
+ 
+	matrix_trans[0]  = m_yAxis[0];
+	matrix_trans[1]  = m_yAxis[1];
+	matrix_trans[2]  = m_yAxis[2];
+ 
+
+	matrix_trans[4]  = m_xAxis[0];
+	matrix_trans[5]  = m_xAxis[1];
+	matrix_trans[6]  = m_xAxis[2];
+
+	matrix_trans[8]  = m_zAxis[0];
+	matrix_trans[9]  = m_zAxis[1];
+	matrix_trans[10] = m_zAxis[2];
+
+	matrix_trans[12] = m_position[0];
+	matrix_trans[13] = m_position[1];
+	matrix_trans[14] = m_position[2];
+
 	// TODO:
     // Compute the transformation matrix for this object
 	// according to the current position and rotation

@@ -48,6 +48,70 @@ public:
 	 * @brief   The three values of a vector
 	 */
 	float x, y, z;
+
+	/**
+	 * @brief	Adds two vectors and returns a new vector
+	 * @param other	The vector to add
+	 */
+	Vector operator+(const Vector& other)const;
+
+	/**
+	 * @brief	Adds two vectors and returns this modifyed vector
+	 * @param other	The vector to add
+	 */
+	Vector& operator+=(const Vector& other);
+
+	/**
+	 * @brief	Substracts two vectors and returns a new vector
+	 * @param other	The vector to subtract
+	 */
+	Vector operator-(const Vector& other)const;
+
+	/**
+	 * @brief	Substracts two vectors and returns this modifyed vector
+	 * @param other	The vector to substract
+	 */
+	Vector& operator-=(const Vector& other);
+
+	/**
+	 * @brief	Returns a new vector scalled by scale
+	 * @param scale	The factor to sacle with
+	 */
+	Vector operator*(const float scale)const;
+
+	/**
+	 * @brief	Returns this vector scalled by scale
+	 * @param scale	The factor to sacle with
+	 */
+	Vector& operator*=(const float scale);
+
+	/**
+	 * @brief	Returns a new vector scalled by scale
+	 * @param scale	The factor to sacle with
+	 */
+	Vector operator/(const float scale)const;
+
+	/**
+	 * @brief	Returns this vector scalled by scale
+	 * @param scale	The factor to sacle with
+	 */
+	Vector& operator/=(const float scale);
+
+	/**
+	 * @biref	Returns the number at index
+	 */
+	float operator[](const int& index) const;
+
+	/**
+	 * @brief	Rethrns the standard saclar in a 3d room;
+	 */
+	double scalar();
+
+
+	/**
+	 * @brief	Prints the vector to console
+	 */
+	void print();
 };
     
 } // namespace asteroids
