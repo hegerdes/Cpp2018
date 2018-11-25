@@ -126,10 +126,10 @@ void Model::move(ACTION axis, float speed)
 	switch (axis) 
 	{
 		case ACCEL: 
-			m_position += m_xAxis * speed;
+			m_position += m_xAxis * -speed;
 			break;
 		case STRAFE: 
-			m_position += m_yAxis * speed;
+			m_position += m_yAxis * -speed;
 			break;
 		case LIFT: 
 			m_position += m_zAxis * speed;
