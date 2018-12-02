@@ -28,12 +28,6 @@ Vector::Vector(float _x, float _y, float _z)
 	z = _z; 
 }
 
-Vector::Vector(const Vector& other)
-{
-	x = other.x;
-	y = other.y;
-	z = other.z;
-}
 void Vector::normalize()
 {
 	// Normalize the vector

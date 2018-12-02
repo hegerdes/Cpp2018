@@ -26,15 +26,10 @@ Matrix::Matrix(float* matrix)
     for(int i = 0; i < 16; i++) m[i] = matrix[i];
 }
 
-Matrix::Matrix(const float* matrix)
-{
-    for(int i = 0; i < 16; i++) m[i] = matrix[i];
-}
-
     
 Matrix::Matrix(const Matrix& other)
 {
-    for(int i = 0; i < 16; i++) m[i] = other.m[i];
+    for(int i = 0; i < 16; i++) m[i] = other[i];
 }
 
 Matrix::Matrix(Vector axis, float angle)
@@ -75,10 +70,7 @@ Matrix::Matrix(Vector axis, float angle)
             m3 = m3 * m1;
         }
         
-        *this = m3;
-        /*this = m3 shuld be the smae as 
         for(int i = 0; i < 16; i++) m[i] = m3[i];
-        */
         
     } else {
         float c = cos(angle);
@@ -145,7 +137,10 @@ Matrix::Matrix(const Vector &position, const Vector &angles)
     m[15] = 1;
 }
 
-Matrix::~Matrix(){}
+Matrix::~Matrix()
+{
+    
+}
 
 Matrix& Matrix::operator=(const Matrix& other)
 {
@@ -163,6 +158,7 @@ Matrix& Matrix::operator=(const Matrix& other)
     }
 }
 
+
 Matrix Matrix::operator*(const float &scale) const
 {
     float new_matrix[16];
@@ -174,27 +170,37 @@ Matrix Matrix::operator*(const float &scale) const
 
 Matrix Matrix::operator*(const Matrix &other) const
 {
-    Matrix tmp;
-    for(int i = 0; i < 16; i++) tmp.m[i] = 0;
-    for (int i = 0; i < 4; i ++)
-    {
-        for (int j = 0; j < 4; j ++)
-        {
-            for (int k = 0; k < 4; k ++)
-            {
-                tmp.m[i * 4 + j] += this->m[i * 4 + k] * other.m[k * 4 + j];
-            }
-        }
-    }
-    return tmp;
+    float new_matrix[16];
+    new_matrix[ 0] = m[ 0] * other[ 0] + m[ 4] * other[ 1] + m[ 8] * other[ 2] + m[12] * other[ 3];
+    new_matrix[ 1] = m[ 1] * other[ 0] + m[ 5] * other[ 1] + m[ 9] * other[ 2] + m[13] * other[ 3];
+    new_matrix[ 2] = m[ 2] * other[ 0] + m[ 6] * other[ 1] + m[10] * other[ 2] + m[14] * other[ 3];
+    new_matrix[ 3] = m[ 3] * other[ 0] + m[ 7] * other[ 1] + m[11] * other[ 2] + m[15] * other[ 3];
+    new_matrix[ 4] = m[ 0] * other[ 4] + m[ 4] * other[ 5] + m[ 8] * other[ 6] + m[12] * other[ 7];
+    new_matrix[ 5] = m[ 1] * other[ 4] + m[ 5] * other[ 5] + m[ 9] * other[ 6] + m[13] * other[ 7];
+    new_matrix[ 6] = m[ 2] * other[ 4] + m[ 6] * other[ 5] + m[10] * other[ 6] + m[14] * other[ 7];
+    new_matrix[ 7] = m[ 3] * other[ 4] + m[ 7] * other[ 5] + m[11] * other[ 6] + m[15] * other[ 7];
+    new_matrix[ 8] = m[ 0] * other[ 8] + m[ 4] * other[ 9] + m[ 8] * other[10] + m[12] * other[11];
+    new_matrix[ 9] = m[ 1] * other[ 8] + m[ 5] * other[ 9] + m[ 9] * other[10] + m[13] * other[11];
+    new_matrix[10] = m[ 2] * other[ 8] + m[ 6] * other[ 9] + m[10] * other[10] + m[14] * other[11];
+    new_matrix[11] = m[ 3] * other[ 8] + m[ 7] * other[ 9] + m[11] * other[10] + m[15] * other[11];
+    new_matrix[12] = m[ 0] * other[12] + m[ 4] * other[13] + m[ 8] * other[14] + m[12] * other[15];
+    new_matrix[13] = m[ 1] * other[12] + m[ 5] * other[13] + m[ 9] * other[14] + m[13] * other[15];
+    new_matrix[14] = m[ 2] * other[12] + m[ 6] * other[13] + m[10] * other[14] + m[14] * other[15];
+    new_matrix[15] = m[ 3] * other[12] + m[ 7] * other[13] + m[11] * other[14] + m[15] * other[15];
+    return Matrix(new_matrix);
 }
+
+/**
+ * @brief 	Matrix addition operator. Returns a new matrix
+ *
+ */
 
 Matrix Matrix::operator+(const Matrix &other) const
 {
     float new_matrix[16];
     for(int i = 0; i < 16; i++)
     {
-        new_matrix[i] = m[i] + other.m[i];
+        new_matrix[i] = m[i] + other[i];
     }
     return Matrix(new_matrix);
 }
@@ -207,9 +213,26 @@ Matrix Matrix::operator+=(const Matrix &other)
 
 Matrix Matrix::operator*(const float* &other) const
 {
-    Matrix tmp(other);
-    return *this * tmp;
+    float new_matrix[16];
+    new_matrix[ 0] = m[ 0] * other[ 0] + m[ 4] * other[ 1] + m[ 8] * other[ 2] + m[12] * other[ 3];
+    new_matrix[ 1] = m[ 1] * other[ 0] + m[ 5] * other[ 1] + m[ 9] * other[ 2] + m[13] * other[ 3];
+    new_matrix[ 2] = m[ 2] * other[ 0] + m[ 6] * other[ 1] + m[10] * other[ 2] + m[14] * other[ 3];
+    new_matrix[ 3] = m[ 3] * other[ 0] + m[ 7] * other[ 1] + m[11] * other[ 2] + m[15] * other[ 3];
+    new_matrix[ 4] = m[ 0] * other[ 4] + m[ 4] * other[ 5] + m[ 8] * other[ 6] + m[12] * other[ 7];
+    new_matrix[ 5] = m[ 1] * other[ 4] + m[ 5] * other[ 5] + m[ 9] * other[ 6] + m[13] * other[ 7];
+    new_matrix[ 6] = m[ 2] * other[ 4] + m[ 6] * other[ 5] + m[10] * other[ 6] + m[14] * other[ 7];
+    new_matrix[ 7] = m[ 3] * other[ 4] + m[ 7] * other[ 5] + m[11] * other[ 6] + m[15] * other[ 7];
+    new_matrix[ 8] = m[ 0] * other[ 8] + m[ 4] * other[ 9] + m[ 8] * other[10] + m[12] * other[11];
+    new_matrix[ 9] = m[ 1] * other[ 8] + m[ 5] * other[ 9] + m[ 9] * other[10] + m[13] * other[11];
+    new_matrix[10] = m[ 2] * other[ 8] + m[ 6] * other[ 9] + m[10] * other[10] + m[14] * other[11];
+    new_matrix[11] = m[ 3] * other[ 8] + m[ 7] * other[ 9] + m[11] * other[10] + m[15] * other[11];
+    new_matrix[12] = m[ 0] * other[12] + m[ 4] * other[13] + m[ 8] * other[14] + m[12] * other[15];
+    new_matrix[13] = m[ 1] * other[12] + m[ 5] * other[13] + m[ 9] * other[14] + m[13] * other[15];
+    new_matrix[14] = m[ 2] * other[12] + m[ 6] * other[13] + m[10] * other[14] + m[14] * other[15];
+    new_matrix[15] = m[ 3] * other[12] + m[ 7] * other[13] + m[11] * other[14] + m[15] * other[15];
+    return Matrix(new_matrix);
 }
+
 
 Vector Matrix::operator*(const Vector &v) const
 {
@@ -223,6 +246,8 @@ Vector Matrix::operator*(const Vector &v) const
     
     return Vector(x, y, z);
 }
+
+
 
 
 /**
@@ -287,61 +312,57 @@ void Matrix::toPostionAngle(float pose[6])
     }
 }
 
+
+/**
+ * @brief	Matrix scaling with self assignment.
+ */
+
 void Matrix::operator*=(const float scale)
 {
     *this = *this * scale;
 }
+
+/**
+ * @brief 	Matrix-Matrix multiplication with self assigment.
+ */
 
 void Matrix::operator*=(const Matrix& other)
 {
     *this = *this * other;
 }
 
+/**
+ * @brief	Matrix-Matrix multiplication (array based). See \ref{operator*}.
+ */
+
 void Matrix::operator*=(const float* other)
 {
     *this = *this * other;
 }
 
-Matrix Matrix::operator/(const float scal) const
-{
-    if(scal == 0)
-    {
-        throw DivisionByZeroException("Matrixdivision durch 0", "Matrix / float");
-    }
-    return *this * (1/scal);
-}
+/**
+ * @brief	Returns the internal data array. Unsafe. Will probably
+ * 			removed in one of the next versions.
+ */
+float* Matrix::getData(){ return m;};
 
-Matrix& Matrix::operator/=(const float scal)
+
+/**
+ * @brief	Indexed element (reading) access.
+ */
+float Matrix::operator[](const int index) const
 {
-    if(scal == 0)
-    {
-        throw DivisionByZeroException("Matrixdivision durch 0", "Matrix /= float");
-    }
-    *this = *this / scal;
-    return *this;
+    /// TODO: Boundary check
+    return m[index];
 }
 
 
 /**
- * @brief   Returns a Proxy that hollds a float*.
- *          Performs bound check.
+ * @brief  	Writeable index access
  */
-Matrix::Proxy Matrix::operator[](const int index)
+float& Matrix::operator[](const int index)
 {
-    if(index > 3 || index < 0)
-    {
-        throw OutOfBoundsException("Fehler beim Zugriff der ersten Mattrix-Dimension", index);
-    }
-    return Proxy(m + 4 * index);
-}
-
-float& Matrix::Proxy::operator[](const int index)
-{
-    if(index > 3 || index < 0)
-    {
-        throw OutOfBoundsException("Fehler beim Zugriff der zweiten Matrix-Dimension" , index);
-    }
-    return line[index];
+    return m[index];
 }
 
 /**
@@ -374,9 +395,7 @@ Matrix Matrix::inv(bool& success)
         for ( j = 0; j < 4; j++ ) {
             sign = 1 - ( (i +j) % 2 ) * 2;
             submat( mtemp, i, j );
-            Mout[j*4][i] = ( det3( mtemp ) * sign ) / mdet;
-            /*Should do the same*/
-            //Mout[i+j*4] = ( det3( mtemp ) * sign ) / mdet;
+            Mout[i+j*4] = ( det3( mtemp ) * sign ) / mdet;
         }
     }
     return Mout;
@@ -407,7 +426,7 @@ void Matrix::submat(float* submat, int i, int j)
  * @param    M  input 3x3 matrix
  * @return   determinant of input matrix
  */
-float Matrix::det3(const float *M )
+float Matrix::det3( const float *M )
 {
     float det;
     det = (double)(  M[0] * ( M[4]*M[8] - M[7]*M[5] )

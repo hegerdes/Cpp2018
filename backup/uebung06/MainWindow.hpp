@@ -20,12 +20,10 @@
 #include <GL/glew.h>
 
 #include "Camera.hpp"
-#include "renderOBJ/TriangleMesh.hpp"
-#include "renderOBJ/Sphere.hpp"
+//#include "TriangleMesh.hpp"
 
 namespace asteroids
 {
-class Renderable2D;
 /**
  * @brief   Represents the main window of the game. This
  *          class contains the main loop, handles all
@@ -66,7 +64,7 @@ public:
 private:
 
     /// A pointer to a model to render
-    TriangleMesh*          m_mesh;
+    //TriangleMesh*          m_mesh;
 
     /// The virtual camera
     Camera          m_camera;  
@@ -82,11 +80,8 @@ private:
 
     /// The SDL OpenGL rendering context
     SDL_GLContext   m_sdlGlcontext;
-
-    // For relyed dependecies
-    Renderable2D* _rend2d;
 };
 
-}// namespace asteroids
+}
 
 #endif

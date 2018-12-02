@@ -75,16 +75,6 @@ set(ASTEROID_SOURCES
     Matrix.cpp
     Quaternion.cpp
     Vector.cpp
-    exceptions/BaseException.cpp
-    exceptions/OutOfBoundsException.cpp
-    exceptions/DivisionByZeroException.cpp
-    renderOBJ/Renderable3D.cpp
-    renderOBJ/Renderable2D.cpp
-    renderOBJ/Rectangle.cpp
-    renderOBJ/TriangleMesh.cpp
-    renderOBJ/Sphere.cpp
-    renderOBJ/Circle.cpp
-
 )
 
 ###############################################################################

@@ -40,13 +40,6 @@ public:
 	Vector(float x, float y, float z);
 
 	/**
-	 * @brief Construct a new Vector object by deep copy ot other
-	 * 
-	 * @param other Vector to copy 
-	 */
-	Vector(const Vector& other);
-
-	/**
 	 * @brief   Normalize a Vector
 	 */
 	void normalize();

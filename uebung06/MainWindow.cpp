@@ -10,6 +10,9 @@
  */
 
 #include "MainWindow.hpp"
+#include "renderOBJ/Rectangle.hpp"
+#include "renderOBJ/Renderable2D.hpp"
+#include "renderOBJ/Circle.hpp"
 
 #include <iostream>
 
@@ -80,7 +83,7 @@ MainWindow::MainWindow(
     }
 
     // Load model
-    // m_mesh = new TriangleMesh(plyname);
+    m_mesh = new TriangleMesh(plyname);
 }
 
 int MainWindow::width()
@@ -101,162 +104,163 @@ void MainWindow::execute()
     int h = 100;
 
     // TODO: Implement TriangleMesh, Circle, Rectangle and Sphere classes
-    // and uncomment this code and the triangle mesh instantiaions to test them...
+    //and uncomment this code and the triangle mesh instantiaions to test them...
     
-    // Circle circle(this, x, y, 100, 20);
-    // circle.setColor(1.0, 0.0, 0.0);
+    Circle circle(this, x, y, 100, 20);
+    circle.setColor(1.0, 0.0, 0.0);
     
-    // Rectangle rect(this, x - w / 2, y - h / 2, w, h);
-    // rect.setColor(0.0, 1.0, 2.0);
+    Rectangle rect(this, x - w / 2, y - h / 2, w, h);
+    rect.setColor(0.0, 1.0, 2.0);
 
-    // Sphere sphere(Vector(0, 0, 0), 10);
+    Sphere sphere(Vector(0, 0, 0), 10);
+    sphere.setColor(255.0, 1.0,1.0);
 
-    // if(m_mesh && m_sdlWindow && m_sdlGlcontext)
-    // {
-    //     bool loop = true;
-    //     const Uint8* keyStates;
+    if(m_mesh && m_sdlWindow && m_sdlGlcontext)
+    {
+        bool loop = true;
+        const Uint8* keyStates;
        
-    //     while (loop)
-    //     {
-    //         Clear background
-    //         glClear(GL_COLOR_BUFFER_BIT );
+        while (loop)
+        {
+            //Clear background
+            glClear(GL_COLOR_BUFFER_BIT );
 
-    //         Apply camera, also loads indentity matrix
-    //         m_camera.apply();
+            //Apply camera, also loads indentity matrix
+            m_camera.apply();
 
-    //         Markers for mouse buttons
-    //         bool r_pressed = false;
-    //         bool l_pressed = false;
+            //Markers for mouse buttons
+            bool r_pressed = false;
+            bool l_pressed = false;
 
-    //         Handle events
-    //         SDL_Event event;
-    //         while (SDL_PollEvent(&event))
-    //         {
-    //             switch(event.type)
-    //             {
-    //                 Window was closed, exit main loop
-    //                 case SDL_QUIT:
-    //                     loop = false;
-    //                     break;
-    //                 Handle mouse motion
-    //                 case SDL_MOUSEMOTION:
+            //Handle events
+            SDL_Event event;
+            while (SDL_PollEvent(&event))
+            {
+                switch(event.type)
+                {
+                    //Window was closed, exit main loop
+                    case SDL_QUIT:
+                        loop = false;
+                        break;
+                    //Handle mouse motion
+                    case SDL_MOUSEMOTION:
 
-    //                         Check if left button is pressed
-    //                         if(event.motion.state & SDL_BUTTON_LMASK)
-    //                         {
-    //                             l_pressed = true;
-    //                         }
+                            //Check if left button is pressed
+                            if(event.motion.state & SDL_BUTTON_LMASK)
+                            {
+                                l_pressed = true;
+                            }
 
-    //                         Check if right button is pressed
-    //                         if(event.motion.state & SDL_BUTTON_RMASK)
-    //                         {
-    //                             r_pressed = true;
-    //                         }
+                            //Check if right button is pressed
+                            if(event.motion.state & SDL_BUTTON_RMASK)
+                            {
+                                r_pressed = true;
+                            }
 
-    //                         Handle motion for pressed L button while R is not
-    //                         pressed 
-    //                         if(l_pressed & !r_pressed)
-    //                         {
-    //                            if(event.motion.xrel > -3)
-    //                             {
-    //                                 m_camera.turn(Camera::LEFT);
-    //                             }
-    //                             if(event.motion.xrel < 3)
-    //                             {
-    //                                 m_camera.turn(Camera::RIGHT);
-    //                             }
-    //                             if(event.motion.yrel > 3)
-    //                             {
-    //                                 m_camera.turn(Camera::UP);
-    //                             }
-    //                             if(event.motion.yrel < -3)
-    //                             {
-    //                                 m_camera.turn(Camera::DOWN);
-    //                             }
-    //                         }
+                            /*Handle motion for pressed L button while R is not
+                            pressed*/ 
+                            if(l_pressed & !r_pressed)
+                            {
+                               if(event.motion.xrel > -3)
+                                {
+                                    m_camera.turn(Camera::LEFT);
+                                }
+                                if(event.motion.xrel < 3)
+                                {
+                                    m_camera.turn(Camera::RIGHT);
+                                }
+                                if(event.motion.yrel > 3)
+                                {
+                                    m_camera.turn(Camera::UP);
+                                }
+                                if(event.motion.yrel < -3)
+                                {
+                                    m_camera.turn(Camera::DOWN);
+                                }
+                            }
 
-    //                         Handle motion for pressed R button while L is not
-    //                         pressed 
-    //                         if(r_pressed & !l_pressed)
-    //                         {
-    //                            if(event.motion.xrel > 3)
-    //                            {
-    //                                m_camera.move(Camera::RIGHT);
-    //                            }
-    //                            if(event.motion.xrel < -3)
-    //                            {
-    //                                m_camera.move(Camera::LEFT);
-    //                            } if(event.motion.yrel > 3)
-    //                            {
-    //                                m_camera.move(Camera::FORWARD);
-    //                            }
-    //                            if(event.motion.yrel < -3)
-    //                            {
-    //                                m_camera.move(Camera::BACKWARD);
-    //                            }
-    //                         }
-    //                     break;
-    //                 default:
-    //                     break;
-    //             }
+                            /*Handle motion for pressed R button while L is not
+                            pressed*/ 
+                            if(r_pressed & !l_pressed)
+                            {
+                               if(event.motion.xrel > 3)
+                               {
+                                   m_camera.move(Camera::RIGHT);
+                               }
+                               if(event.motion.xrel < -3)
+                               {
+                                   m_camera.move(Camera::LEFT);
+                               } if(event.motion.yrel > 3)
+                               {
+                                   m_camera.move(Camera::FORWARD);
+                               }
+                               if(event.motion.yrel < -3)
+                               {
+                                   m_camera.move(Camera::BACKWARD);
+                               }
+                            }
+                        break;
+                    default:
+                        break;
+                }
 
-    //             Get keyboard states and handle model movement
-    //             keyStates = SDL_GetKeyboardState(NULL);
+                //Get keyboard states and handle model movement
+                keyStates = SDL_GetKeyboardState(NULL);
 
-    //             if(keyStates[SDL_SCANCODE_UP])
-    //             {
-    //                 m_mesh->rotate(TriangleMesh::YAW, 0.05);
-    //             }
-    //             if(keyStates[SDL_SCANCODE_DOWN])
-    //             {
-    //                 m_mesh->rotate(TriangleMesh::YAW, -0.05);
-    //             }
-    //             if(keyStates[SDL_SCANCODE_LEFT])
-    //             {
-    //                 m_mesh->rotate(TriangleMesh::ROLL, 0.05);
-    //             }
-    //             if(keyStates[SDL_SCANCODE_RIGHT])
-    //             {
-    //                 m_mesh->rotate(TriangleMesh::ROLL, -0.05);
-    //             }
-    //             if(keyStates[SDL_SCANCODE_W])
-    //             {
-    //                 m_mesh->move(TriangleMesh::ACCEL, 3);
-    //             }
-    //             if(keyStates[SDL_SCANCODE_S])
-    //             {
-    //                 m_mesh->move(TriangleMesh::ACCEL, -3);
-    //             }
-    //             if(keyStates[SDL_SCANCODE_A])
-    //             {
-    //                 m_mesh->move(TriangleMesh::STRAFE, 3);
-    //             }
-    //             if(keyStates[SDL_SCANCODE_D])
-    //             {
-    //                 m_mesh->move(TriangleMesh::STRAFE, -3);
-    //             }
-    //         }
+                if(keyStates[SDL_SCANCODE_UP])
+                {
+                    m_mesh->rotate(TriangleMesh::YAW, 0.05);
+                }
+                if(keyStates[SDL_SCANCODE_DOWN])
+                {
+                    m_mesh->rotate(TriangleMesh::YAW, -0.05);
+                }
+                if(keyStates[SDL_SCANCODE_LEFT])
+                {
+                    m_mesh->rotate(TriangleMesh::ROLL, 0.05);
+                }
+                if(keyStates[SDL_SCANCODE_RIGHT])
+                {
+                    m_mesh->rotate(TriangleMesh::ROLL, -0.05);
+                }
+                if(keyStates[SDL_SCANCODE_W])
+                {
+                    m_mesh->move(TriangleMesh::ACCEL, 3);
+                }
+                if(keyStates[SDL_SCANCODE_S])
+                {
+                    m_mesh->move(TriangleMesh::ACCEL, -3);
+                }
+                if(keyStates[SDL_SCANCODE_A])
+                {
+                    m_mesh->move(TriangleMesh::STRAFE, 3);
+                }
+                if(keyStates[SDL_SCANCODE_D])
+                {
+                    m_mesh->move(TriangleMesh::STRAFE, -3);
+                }
+            }
 
-    //         Render model
-    //         m_mesh->render();
+            /*Render model*/
+            m_mesh->render();
 
-    //         circle.render();
-    //         rect.render();
-    //         sphere.render();
+            circle.render();
+            rect.render();
+            sphere.render();
 
-        //     // Bring up back buffer 
-	// 	    SDL_GL_SwapWindow(m_sdlWindow);
-        // }
-    //}
+            // Bring up back buffer 
+		    SDL_GL_SwapWindow(m_sdlWindow);
+        }
+    }
 }
 
 MainWindow::~MainWindow()
 {
     // Delete model
-    // if(m_mesh)
-    // {
-    //     delete m_mesh;
-    // }
+    if(m_mesh)
+    {
+        delete m_mesh;
+    }
 
     // Cleanup SDL stuff
 	SDL_GL_DeleteContext(m_sdlGlcontext);

@@ -17,8 +17,6 @@
 #include <iomanip>
 
 #include "Vector.hpp"
-#include "exceptions/OutOfBoundsException.hpp"
-#include "exceptions/DivisionByZeroException.hpp"
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -37,25 +35,8 @@ namespace asteroids{
 
 class Matrix {
 public:
-	class Proxy
-	{
-		public:
-		/**
-		 * @brief	Constructor fpr proxy
-		 * @param v	Gets the n-line of Matrix
-		 */
-		Proxy(float* f): line(f){}
-		/**
-		 * @biref	Gets the number at the index
-		 * 			performs bound check
-		 */
-		float& operator[](int i);
-		
-		private:
-		//to Save the line
-		float* line;
-	};
- 	/**
+
+	/**
 	 * @brief 	Default constructor. Initializes a identity matrix.
 	 */
     Matrix();
@@ -65,11 +46,6 @@ public:
 	 * 			that the array has exactly 16 fields.
 	 */
     Matrix(float* matrix);
-	/**
-	 * @brief	Initializes a matrix wit the given data array. Ensure
-	 * 			that the array has exactly 16 fields.
-	 */
-	Matrix(const float* matrix);
 	/**
 	 * @brief 	Copy constructor.
 	 */
@@ -159,6 +135,12 @@ public:
 	 * @brief	Matrix-Matrix multiplication (array based). See \ref{operator*}.
 	 */
     void operator*=(const float* other);
+    
+	/**
+	 * @brief	Returns the internal data array. Unsafe. Will probably
+	 * 			removed in one of the next versions.
+	 */
+	float* getData();
 
 	/**
 	 * @brief	Returns the element at the given index.
@@ -171,33 +153,14 @@ public:
     float operator[](const int index) const;
 
 	/**
-	 * @brief  	Returns Proxy with float* to n-line
+	 * @brief  	Writeable index access
 	 */
-    Proxy operator[](const int index);
-
-	/**
-	 * @brief	Returns a new matrix that will be scalled by scal. 
-	 * 			Will not override the original matrix.
-	 * @param scal The float to scale with.
-	 */
-	Matrix operator/(const float scal) const;
-
-	/**
-	 * @brief	Returns a matrix that will be scalled by scal. 
-	 * 			Will override the original (this) matrix.
-	 * @param scal The float to scale with.
-	 */
-	Matrix& operator/=(const float scal);
-	
+    float& operator[](const int index);
+    
 	/**
 	 * @brief   Returns the matrix's determinant
 	 */
     float det();
-	/**
- 	* @brief	Returns the internal data array. Unsafe. Will probably
- 	* 			removed in one of the next versions.
- 	*/
-	inline float* getData(){ return m;};
     
     /** 
      * @brief   Inverts the matrix. Success is true if operation was successful
@@ -225,8 +188,6 @@ private:
     
     /// Internal data array
 	float m[16];
-
-	Proxy* tmp;
 };
 
 /**
