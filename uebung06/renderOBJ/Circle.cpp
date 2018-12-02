@@ -27,7 +27,7 @@ void Circle::render()
     glBegin(GL_LINE_LOOP);
     for(int ii = 0; ii < m_segments; ii++)
     {
-        glColor3f(1.0, 0.0, 0.0);
+        glColor3f(getColorR(), getColorG(), getColorB());
         glVertex2f(x + m_x, y + m_y);//output vertex
 
         //calculate the tangential vector

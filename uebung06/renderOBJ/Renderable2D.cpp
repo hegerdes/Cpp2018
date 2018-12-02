@@ -38,7 +38,9 @@ void Renderable2D::postrender()
 
 void Renderable2D::setColor(float r, float g, float b)
 {
-    //TODO Ipmlement Color
+    color2D[0] = r;
+    color2D[1] = g;
+    color2D[2] = b;
 }
 
 }// namespace asteroids

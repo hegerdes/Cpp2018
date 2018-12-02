@@ -364,6 +364,10 @@ Matrix Matrix::inv(bool& success)
 {
     Matrix Mout;
     float  mdet = det();
+    if(mdet == 0)
+    {
+        throw DivisionByZeroException("Divison druch 0", "Beim berechner der Determinante");
+    }
     if ( fabs( mdet ) < 0.00000000000005 ) {
         cout << "Error matrix inverting! " << mdet << endl;
         return Mout;
@@ -375,6 +379,7 @@ Matrix Matrix::inv(bool& success)
             sign = 1 - ( (i +j) % 2 ) * 2;
             submat( mtemp, i, j );
             Mout[j*4][i] = ( det3( mtemp ) * sign ) / mdet;
+            
             /*Should do the same*/
             //Mout[i+j*4] = ( det3( mtemp ) * sign ) / mdet;
         }

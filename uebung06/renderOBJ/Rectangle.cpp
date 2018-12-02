@@ -16,6 +16,7 @@ void Rectangle::render()
     Renderable2D::prerender();
 
     glBegin(GL_LINE_LOOP);
+    glColor3f(getColorR(), getColorG(), getColorB());
     glVertex2d(m_x, m_y);
     glVertex2d(m_x + m_w, m_y);
     glVertex2d(m_x + m_w, m_y + m_h);

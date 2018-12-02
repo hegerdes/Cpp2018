@@ -91,19 +91,10 @@ public:
     void render();
 
     /**
-     * @brief   Set the Color object. Interfacefunctin
-     * 
-     * @param r float-value of read 
-     * @param g float-value of green
-     * @param b float-value of blue
-     */
-    void setColor(float r, float g, float b);
-
-    /**
      * @brief Destroys the TriangleMesh object
      * 
      */
-    ~TriangleMesh();
+    virtual ~TriangleMesh();
 
 protected:
 

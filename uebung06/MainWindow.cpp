@@ -102,9 +102,6 @@ void MainWindow::execute()
     int y = m_height / 2;
     int w = 200;
     int h = 100;
-
-    // TODO: Implement TriangleMesh, Circle, Rectangle and Sphere classes
-    //and uncomment this code and the triangle mesh instantiaions to test them...
     
     Circle circle(this, x, y, 100, 20);
     circle.setColor(1.0, 0.0, 0.0);
@@ -113,7 +110,7 @@ void MainWindow::execute()
     rect.setColor(0.0, 1.0, 2.0);
 
     Sphere sphere(Vector(0, 0, 0), 10);
-    sphere.setColor(255.0, 1.0,1.0);
+    //sphere.setColor(0.5, 0.6,1.0);
 
     if(m_mesh && m_sdlWindow && m_sdlGlcontext)
     {
@@ -247,7 +244,7 @@ void MainWindow::execute()
             circle.render();
             rect.render();
             sphere.render();
-
+            
             // Bring up back buffer 
 		    SDL_GL_SwapWindow(m_sdlWindow);
         }

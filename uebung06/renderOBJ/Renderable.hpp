@@ -25,7 +25,6 @@ namespace asteroids
              * @param b float-value of blue
              */
             virtual void setColor(float r, float g, float b) = 0; 
-
     };
 
 }

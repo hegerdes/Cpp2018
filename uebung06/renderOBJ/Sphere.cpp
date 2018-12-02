@@ -38,6 +38,8 @@ void Sphere::render()
         }
 
         glBegin(GL_TRIANGLE_FAN);
+        //Added color fpr Shpere
+        glColor3f(getColorR(), getColorG(), getColorB());
         glNormal3d(0,1,0);
         glVertex3d(0, m_radius,0);
         for (t=0; t< m_numSides; t++)
@@ -60,6 +62,8 @@ void Sphere::render()
     {
         vertIndex = curStack * m_numSides;
         glBegin(GL_QUAD_STRIP);
+        //Added color cor Shpere
+        glColor3f(getColorR(), getColorG(), getColorB());
             for (curSlice=0; curSlice< m_numSides; curSlice++)
             {
                 glNormal3d(points[vertIndex+curSlice].x, points[vertIndex+curSlice].y, points[vertIndex+curSlice].z);
@@ -94,12 +98,12 @@ void Sphere::render()
     glEnd();
 }
 
-void Sphere::setColor(float r, float g, float b)
-{
-    color[0] = r;
-    color[1] = g;
-    color[2] = b;
-}
+// void Sphere::setColor(float r, float g, float b)
+// {
+//     color3D[0] = r;
+//     color3D[1] = g;
+//     color3D[2] = b;
+// }
 
 Sphere::~Sphere()
 {

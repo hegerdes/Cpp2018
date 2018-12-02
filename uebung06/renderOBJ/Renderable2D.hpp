@@ -12,25 +12,67 @@ class Renderable2D : public Renderable
 { 
     public:
 
-        /// Constructor     
+        /**
+         * @brief Construct a new Renderable 2D object
+         * 
+         * @param mainWindow Pointer the MainWindow for dimensions
+         */
         Renderable2D(MainWindow* mainWindow); 
 
-        //Method to call in subclasses at the beginning of render()
+        /**
+         * @brief   Context change form 3D to 2D.
+         *          Accsessable for subclasses
+         */
         void prerender();
 
-        //Method to call in subclasses at the end of render()
+        /**
+         * @brief   Context change form 2D to 3D.
+         *          Accsessable for subclasses
+         */
         void postrender();
 
-        /// Renders the object     
+        /**
+         * @brief Virtual function for subclasses
+         * 
+         */
         virtual void render() = 0; 
 
-        /// Sets the current rendering color     
-        void setColor(float r, float g, float b); 
+        /**
+         * @brief Set the Color object
+         * 
+         * @param r Value for red
+         * @param g Value for green
+         * @param b Value for blue
+         */
+        void setColor(float r, float g, float b);
+
+    protected:
+
+        /**
+         * @brief Get the Color R object
+         * 
+         * @return float of red
+         */
+        inline float getColorR(){return color2D[0];}
+
+        /**
+         * @brief Get the Color G object
+         * 
+         * @return float of green
+         */
+        inline float getColorG(){return color2D[1];}
+
+        /**
+         * @brief Get the Color B object
+         * 
+         * @return float blue
+         */
+        inline float getColorB(){return color2D[2];}
         
-    private: //maybe protected
+    private:
         MainWindow* m_window;
 
-        //TODO?
+        float color2D[3] = {1.0,0.0,0.0};
 };
 
 }// namespace asteroids

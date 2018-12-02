@@ -15,13 +15,13 @@
 int main(int argc, char** argv)
 {
     string buffer = "../models/arrow.ply";
-    asteroids::MainWindow mainWindow("Asteroids", buffer, 1024, 768);
-    //asteroids::MainWindow mainWindow("Asteroids", argv[1], 1024, 768);
+    //asteroids::MainWindow mainWindow("Asteroids", buffer, 1024, 768);
+    asteroids::MainWindow mainWindow("Asteroids", argv[1], 1024, 768);
     mainWindow.execute();
     
     
     
-    
+    /*Test Exceptions*/
     // float test2[16] = { 1,2,3,4,
     //                     5,6,7,8,
     //                     9,10,11,12,

@@ -198,8 +198,8 @@ void TriangleMesh::render()
 
 		// Render wireframe TriangleMesh
 		glBegin(GL_LINE_LOOP);
-        //TODO Set color
-		glColor3f(0.5f, 0.0f, 1.0f);
+        //Set color based on member values
+		glColor3f(getColorR(), getColorG(), getColorB());
 		glVertex3f(m_vertexBuffer[a], m_vertexBuffer[a + 1], m_vertexBuffer[a + 2]);
 		glVertex3f(m_vertexBuffer[b], m_vertexBuffer[b + 1], m_vertexBuffer[b + 2]);
 		glVertex3f(m_vertexBuffer[c], m_vertexBuffer[c + 1], m_vertexBuffer[c + 2]);
@@ -214,12 +214,12 @@ void TriangleMesh::render()
 }
 
 
-void TriangleMesh::setColor(float r, float g, float b)
-{
-    color[0] = r;
-    color[1] = g;
-    color[2] = b;
-}
+// void TriangleMesh::setColor(float r, float g, float b)
+// {
+//     color3D[0] = r;
+//     color3D[1] = g;
+//     color3D[2] = b;
+// }
 
 TriangleMesh::~TriangleMesh()
 {

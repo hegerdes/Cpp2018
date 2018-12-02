@@ -20,26 +20,28 @@ class Sphere: public Renderable3D
          */     
         Sphere(const Vector& position, float radius, int numSides = 10, int numStacks = 10);          
 
-        // Renders the sphere at the given position     
+        /**
+         * @brief Renders a sphere in OpenGl
+         * 
+         */
         void render();
-
-        void setColor(float r, float g, float b);
 
         /**
          * @brief Destroy the Sphere object
          */
         ~Sphere();
+
         
     private:
+        // Position
         Vector m_position;
 
+        // Radius
         float m_radius;
 
         int m_numSides;
 
         int m_numStacks;
-
-        //TODO?
 };
 
 }

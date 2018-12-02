@@ -1,0 +1,4 @@
+Es ist sinnvoll, dass Renderable2D einen eigenen Konstructor hat, weil 
+alle 2D-Objekte die Dimensionen des MainWindows brauchen. Man könnte Dimensionen
+in alle 2D-Objekte einzeln implementieren, würde dann aber reduendanten Code haben.
+Auch ist dieser Code dann nicht mehr so leicht austauschbar.
