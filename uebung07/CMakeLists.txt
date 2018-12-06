@@ -7,6 +7,7 @@ cmake_minimum_required(VERSION 3.0.2)
 # The name of out project
 ###############################################################################
 project(CPP18_ASTEROIDS)
+project(ListMain)
 
 ###############################################################################
 # Now you would normally declare additional linker and include directories.
@@ -82,12 +83,17 @@ set(ASTEROID_SOURCES
     Quaternion.cpp
     Vector.cpp
 )
+set(LIST_SOURCES
+    List.tcc
+    ListTest.cpp
+)
 
 ###############################################################################
 # The executable fpr our project
 ###############################################################################
 
 add_executable(asteroids ${ASTEROID_SOURCES})
+add_executable(ListTest ${LIST_SOURCES})
 
 ###############################################################################
 # External library dependencys

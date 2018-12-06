@@ -19,8 +19,10 @@
 #define GL3_PROTOTYPES 1
 #include <GL/glew.h>
 
+#include "Rectangle.hpp"
 #include "Camera.hpp"
 #include "TriangleMesh.hpp"
+#include "List.hpp"
 
 namespace asteroids
 {
@@ -48,6 +50,13 @@ public:
      * @brief Start the window's main loop
      */
     void execute();
+
+    /**
+     * @brief Calls the render-function of every shape
+     * @param obj   The object to render
+     * 
+     */
+    static void render(Renderable*& obj);
 
     /**
      * @brief Destroys the Main Window object

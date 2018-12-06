@@ -97,6 +97,11 @@ int MainWindow::height()
     return m_height;
 }
 
+void MainWindow::render(Renderable*& obj)
+{
+    obj->render();
+}
+
 void MainWindow::execute()
 {
     int x = m_width / 2;
@@ -104,14 +109,19 @@ void MainWindow::execute()
     int w = 200;
     int h = 100;
 
+    List<Renderable*> renderOBJ;
+
     Circle circle(this, Vector2i(m_width / 2,m_height / 2), 100, 20);
     circle.setColor(1.0, 0.0, 0.0);
     Rectangle rect(this, Vector2i(x - w / 2, y - h / 2), Vector2i(w, h));
     rect.setColor(0.0, 1.0, 2.0);
     Sphere sphere(Vector3f(0, 0, 0), 10);
 
-    // TODO: Add these all renderable objects to your generic list 
-    // implementation
+    ///List of renderable shapes
+    renderOBJ.insert(&circle);
+    renderOBJ.insert(&rect);
+    renderOBJ.insert(&sphere);
+    renderOBJ.insert(m_mesh);
 
     if(m_mesh && m_sdlWindow && m_sdlGlcontext)
     {
@@ -239,13 +249,8 @@ void MainWindow::execute()
                 }
             }
 
-            // TODO: Replace this individual render calls with
-            // the for_each construct of your generic list.
-
-            m_mesh->render();
-            circle.render();
-            rect.render();
-            sphere.render();
+            renderOBJ.for_each(render);
+            
 
             // Bring up back buffer 
 		    SDL_GL_SwapWindow(m_sdlWindow);
