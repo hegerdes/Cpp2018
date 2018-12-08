@@ -1,13 +1,11 @@
 /**
  *  @file Vector.hpp
  *
- *  @date 18.11.2018
- *  @author Thomas Wiemann
+ *  @date 07.12.2018
+ *  @author Henrik Gerdes
  * 
- *  Copyright (c) 2018 Thomas Wiemann.
- *  Restricted usage. Licensed for participants of the course "The C++ Programming Language" only.
- *  No unauthorized distribution.
  */
+
 
 #ifndef __Vector_HPP__
 #define __Vector_HPP__
@@ -18,126 +16,108 @@
 namespace asteroids
 {
 
-/**
- * @brief   Vector representation with three floats for OpenGL.
- * 
- * @todo	Replace this float-specific implementation for three coordinates
- * 			with a generic version called 'Vector' that supports 2 to 3 coordinates
- * 			with different types. Here we will use float and int for space
- * 			and screen coordinates respectively.
- */
-class Vector3f {
 
-public:
+template<typename T, int L> class Vector
+{
+    public:
+    Vector<T,L>();
 
-	/**
-	 * @brief   Construcs a default Vector3f object
-	 */
-	Vector3f();
+    /**
+     * @brief Construct a new Vector object
+     * 
+     * @param x 
+     * @param y 
+     * @param z 
+     */
+    Vector<T,L>(T x, T y ,T z = 0);
 
-	/**
-	 * @brief   Construcs a Vector object with given values
-	 * @param x x-value
-	 * @param y y-value
-	 * @param z z-value
-	 */
-	Vector3f(float x, float y, float z);
+    /**
+     * @brief Destroy the Vector object
+     */
+    ~Vector<T,L>();
 
 	/**
 	 * @brief   Normalize a Vector
 	 */
-	void normalize();
+    void normalize();
+
+	/**
+	 * @brief 	Assings a Vector to this object.
+	 * 			Performs a copy of vec.
+	 * 
+	 * @param vec Vector to assign
+	 */
+	void operator= (const Vector& vec);
   
 	/**
 	 * @brief   Defines the vector addition
 	 * @param vec vector
 	 * @return vector
 	 */
-	Vector3f operator+ (const Vector3f& vec) const;
+	Vector operator+ (const Vector& vec) const;
 
 	/**
 	 * @brief   Defines the vector subtraction
 	 * @param vec vector
 	 * @return vector
 	 */
-	Vector3f operator- (const Vector3f& vec) const;
+	Vector operator- (const Vector& vec) const;
 
 	/**
 	 * @brief   Construcs the scalar multiplication
 	 * @param scale scalar
 	 * @return vector
 	 */
-	Vector3f operator* (const float scale) const;
+	Vector operator* (const T& scale) const;
 
 	/**
 	 * @brief   Defines the vector multiplication
 	 * @param vec vector
-	 * @return result (as a float)
+	 * @return result (as T)
 	 */
-	float  operator* (const Vector3f& vec) const;
+	T  operator* (const Vector& vec) const;
 
 	/**
 	 * @brief   Defines the access to a Vector value
 	 * @param index wanted value
-	 * @return vectorentry (as a float)
+	 * @return vectorentry (as T)
 	 */
-	float operator[] (const int& index) const;
+	T operator[] (const int& index) const;
     
     /**
      * @brief   Defines the access to a Vector value
      * @param index wanted value
-     * @return vectorentry (as a float)
+     * @return vectorentry (as T)
      */
-    float& operator[] (const int& index);
+    T& operator[] (const int& index);
 
 	/**
 	 * @brief   Defines the fast notation of vector addition
 	 * @param v vector
 	 */
-	void operator+= (const Vector3f& v);
+	void operator+= (const Vector& v);
 
 	/**
-	 * @brief   The three values of a vector
+	 * @brief   Defines the fast notation of vector subtraction
+	 * @param v vector
 	 */
-	float x, y, z;
-};
-    
-/***
- * TODO: 	This is just a plain simple replacement for 
- * 			the generic version you are going to implement 
- * 			in this exercise that just gives us the needed index operator 
- * 		    based coordinate access. Replace it with a suitable
- * 			typedef of your generic implementation.
- **/
-struct Vector2i
-{
-	Vector2i(int x, int y)
-	{
-		m[0] = x;
-		m[1] = y;
-	}
+	void operator-= (const Vector& v);
 
-	int& operator[](const int& index)
-	{
-		if(index >= 0 && index <= 2)
-		{
-			return m[index];
-		}
-		throw std::invalid_argument("");
-	}
+	/**
+	 * @brief Prints the Vector to stdout
+	 */
+	void printVector();
 
-	int operator[](const int& index) const
-	{
-		if(index >= 0 && index <= 2)
-		{
-			return m[index];
-		}
-		throw std::invalid_argument("");
-	}
+    private:
+    ///To store the Vector-Values
+    T m[L];
 
-	int m[2];	 	
 };
 
-} // namespace asteroids
+typedef Vector<float,3> Vector3f;
+typedef Vector<int,2> Vector2i;
 
+
+}//asteroids
+#include "Vector.tcc"
 #endif

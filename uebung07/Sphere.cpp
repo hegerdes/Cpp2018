@@ -18,11 +18,11 @@ Sphere::Sphere(
     const Vector3f& position, float radius, 
     int numSides, int numStacks)
 {
+    initTransformations();
     m_radius = radius;
     m_numSides = numSides;
     m_numStacks = numStacks;
     m_position = position;
-    initTransformations();
 }
     
 void Sphere::render()

@@ -22,15 +22,21 @@ namespace asteroids
 
 void Rectangle::render()
 {
-    begin2D();
-    glColor3f(m_r, m_g, m_b);
-    glBegin(GL_LINE_LOOP);
-    glVertex2d(m_position[0], m_position[1]);
-    glVertex2d(m_position[0] + m_dimension[0], m_position[1]);
-    glVertex2d(m_position[0] + m_dimension[0], m_position[1] + m_dimension[1]);
-    glVertex2d(m_position[0], m_position[1] + m_dimension[1]);
-    glEnd();
-    end2D();
+    try{
+        begin2D();
+        glColor3f(m_r, m_g, m_b);
+        glBegin(GL_LINE_LOOP);
+        glVertex2d(m_position[0], m_position[1]);
+        glVertex2d(m_position[0] + m_dimension[0], m_position[1]);
+        glVertex2d(m_position[0] + m_dimension[0], m_position[1] + m_dimension[1]);
+        glVertex2d(m_position[0], m_position[1] + m_dimension[1]);
+        glEnd();
+        end2D();
+    }
+    catch(std::invalid_argument e)
+    {
+        std::cout << "Unable to Render Rectangle. Position is currupted" << std::endl;
+    }
 }
 
 } // namespace asteroids

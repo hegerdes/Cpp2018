@@ -42,25 +42,31 @@ void Circle::render()
 	glBegin(GL_LINE_LOOP); 
 	for(int ii = 0; ii < m_segments; ii++) 
 	{
-        glColor3f(m_r, m_g, m_b); 
-		glVertex2f(x + m_center[0], y + m_center[1]);//output vertex 
+		try{
+			glColor3f(m_r, m_g, m_b); 
+			glVertex2f(x + m_center[0], y + m_center[1]);//output vertex 
 
-		//calculate the tangential vector 
-		//remember, the radial vector is (x, y) 
-		//to get the tangential vector we flip those coordinates and negate one of them 
+			//calculate the tangential vector 
+			//remember, the radial vector is (x, y) 
+			//to get the tangential vector we flip those coordinates and negate one of them 
 
-		float tx = -y; 
-		float ty = x; 
-        
-		//add the tangential vector 
+			float tx = -y; 
+			float ty = x; 
+			
+			//add the tangential vector 
 
-		x += tx * tangetial_factor; 
-		y += ty * tangetial_factor; 
-        
-		//correct using the radial factor 
+			x += tx * tangetial_factor; 
+			y += ty * tangetial_factor; 
+			
+			//correct using the radial factor 
 
-		x *= radial_factor; 
-		y *= radial_factor; 
+			x *= radial_factor; 
+			y *= radial_factor;
+		}
+		catch(invalid_argument e)
+		{
+			cout << "Unable to Render Circle. Position is currupted" << endl;
+		} 
 	} 
     
 	glEnd(); 

@@ -10,6 +10,7 @@
  */
 
 #include "List.hpp"
+#include "Vector.hpp"
 
 
 /**
@@ -39,6 +40,18 @@ int main(int argc, char** argv)
 
     ///Do something with every emlement
     IntList.for_each(pointer);
+
+
+    //Test for VectorGen
+    // asteroids::Vector<float,3> test1(4.0,5.4,7.3);
+    // asteroids::Vector<float,3> test3(4.0,5.4,7.3);
+    // asteroids::Vector<int,2> test4(4,5);
+    // asteroids::Vector<int,2> test2(4,5);
+    // test2 + test4;
+    // test1 += test3;
+    // test1.printVector();
+
+    // std::cout << test1 * test3 << std::endl;
 
 
 

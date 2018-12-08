@@ -81,11 +81,12 @@ set(ASTEROID_SOURCES
     PLYIO.cpp
     Matrix.cpp
     Quaternion.cpp
-    Vector.cpp
+    Vector.tcc
 )
 set(LIST_SOURCES
     List.tcc
     ListTest.cpp
+    Vector.tcc
 )
 
 ###############################################################################

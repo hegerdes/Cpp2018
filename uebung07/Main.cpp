@@ -21,8 +21,8 @@ void print_ints(int& x)
 int main(int argc, char** argv)
 {
     string str = "../models/arrow.ply";
-    asteroids::MainWindow mainWindow("Asteroids", str, 1024, 768);
-    //asteroids::MainWindow mainWindow("Asteroids", argv[1], 1024, 768);
+    //asteroids::MainWindow mainWindow("Asteroids", str, 1024, 768);
+    asteroids::MainWindow mainWindow("Asteroids", argv[1], 1024, 768);
     mainWindow.execute();
 
 
