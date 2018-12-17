@@ -85,6 +85,11 @@ public:
 	 */
 	void operator+= (const Vector<T, L>& v);
 
+	/**
+	 * @brief Prints the Vector
+	 */
+	void printVector();
+
 protected:
 	 /**
 	 * @brief   The internal values of the vector

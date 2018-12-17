@@ -14,11 +14,14 @@
 
 #include <cmath>
 #include <algorithm>
-#include <vector>
+//#include <vector>
 
 #include "Renderable3D.hpp"
 #include "Asteroid.hpp"
 #include "math/Vector.hpp"
+#include "../io/TriangleMeshFactory.hpp"
+#include "../math/Randomizer.hpp"
+#include "../util/List.hpp"
 
 using std::for_each;
 using std::vector;
@@ -55,7 +58,8 @@ public:
 private:
 
    /// The asteroids in the field
-   std::list<Asteroid> asteroids;
+	List<Asteroid*> m_asteroids;
+   //std::list<Asteroid> m_asteroids;
 };
 
 }

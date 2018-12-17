@@ -60,6 +60,11 @@ TexturedMesh::~TexturedMesh()
     for(auto i : m_matFaceLists)
     {
         delete i;
+    }
+
+    for(auto i : m_materials)
+    {
+        delete i;
     }  
 
     // Delelete texture coord arrays

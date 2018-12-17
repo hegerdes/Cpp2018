@@ -48,6 +48,48 @@ template<typename T> class List
        */
       void for_each(void (*do_something)(T& item));
 
+
+      class Interator
+      {
+      public:
+            explicit Interator(typename List<T>::Node* num):index(num){}
+            friend class List;
+
+            bool operator!=(const Interator& other)
+            {
+                  return (index != other.index);
+            }
+            const Interator& operator++()
+            {
+                  index = index->next;
+                  return *this;
+            }
+
+            T& operator*() const
+            {
+                  return index->data;
+            }
+
+      private:
+            typename List<T>::Node* index;
+      };
+
+            /**
+       * @brief 
+       */
+      Interator begin()
+      {
+            return List::Interator(m_root);
+      }
+
+      /**
+       * @brief 
+       */
+      Interator end()
+      {
+            return List::Interator(nullptr);
+      }
+
 private:
 
       /**
@@ -56,19 +98,18 @@ private:
       class Node {
       public:
             Node( T _data, Node* _next) : data(_data), next(_next) {};
-	  //friend class List::Iterator;
             friend class List;
       private:
-         T data;
-         Node* next;
+            T data;
+            Node* next;
       };
 
-      List* m_root;
-
+      Node* m_root;
 };
 
 }
 
 #include "List.tcc"
+
 #endif
 /* end of include guard: LIST_H */

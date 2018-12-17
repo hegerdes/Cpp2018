@@ -10,33 +10,51 @@
  */
 
 #include "AsteroidField.hpp"
-#include "math/Randomizer.hpp"
-#include "rendering/Asteroid.hpp"
-
+#include "Asteroid.hpp"
+#include "../math/Randomizer.hpp"
+#include "../math/Vector.hpp"
 namespace asteroids
 {
 
 AsteroidField::AsteroidField(int quantity, const std::string& filename, float rangemax, float sizemin, float sizemax)
 {
- 	// Generate asteroids
+	//Get instances
+	Randomizer* randominst = Randomizer::instance();
+	TriangleMeshFactory& triangleinst = TriangleMeshFactory::getinstance();
+
+ 	//Generate asteroids
 	for(int i = 0; i < quantity; i++)
 	{
-	   /// TODO: Get mesh from class TriangleMeshFactory and add new 
-	   /// Asteroid to internal list
+		std::cout << "Genarate Asteroid " << i << filename << " at " << std::endl;
+		randominst->getRandomVertex(2).printVector();
+
+		TexturedMesh* textmesh = (TexturedMesh*)(triangleinst.getMesh(filename));
+		m_asteroids.push_back(new Asteroid(textmesh, randominst->getRandomVertex(500), 
+		randominst->getRandomNumber(0, 0.5)));
+
+	   /// TODO: Get mesh from class TriangleMeshFactory and add new DONE Except its just one asteroid
+	   /// Asteroid to internal list DONE
 	}
 }
 
 AsteroidField::~AsteroidField()
 {
-	//asteroids.for_each(deleteAsteroid);
+	for(Asteroid* a : m_asteroids)
+	{
+		if(a)
+		{
+			delete a;
+		}
+	}
+	//m_asteroids.for_each(delete Asteroid);
 	
 }
 
 void AsteroidField::render()
 {
-	for(auto& t : asteroids)
+	for(auto& t : m_asteroids)
 	{
-		t.render();
+		t->render();
 	}
 
 }

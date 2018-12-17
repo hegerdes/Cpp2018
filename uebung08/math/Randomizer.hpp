@@ -12,7 +12,7 @@
 #ifndef RANDOMIZER_HPP_
 #define RANDOMIZER_HPP_
 
-#include "math/Vector.hpp"
+#include "Vector.hpp"
 #include <ctime>
 #include <cstdlib>
 
@@ -41,12 +41,23 @@ public:
     /**
      * @brief   Dtor.
      */
-    virtual ~Randomizer() {};
+    virtual ~Randomizer() 
+    {
+        if(p_instance)
+        {
+            delete p_instance;
+        }
+    };
 
     /**
      * @brief   Returns a random number between high and low
      */
     float getRandomNumber(float low, float high);
+
+    /**
+     * @brief Get the Random Int object
+     */
+    int getRandomInt(int a, int b);
 
     /**
      * @brief   Returns a random with coordinated between -range and +range

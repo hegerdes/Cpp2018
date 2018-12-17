@@ -15,7 +15,8 @@
 using std::string;
 
 #include "Texture.hpp"
-#include "ui/Camera.hpp"
+#include "../ui/Camera.hpp"
+#include "../io/TextureFactory.hpp"
 
 namespace asteroids
 {

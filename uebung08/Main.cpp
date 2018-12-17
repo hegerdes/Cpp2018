@@ -13,7 +13,9 @@
 
 int main(int argc, char** argv)
 {
-    asteroids::MainWindow mainWindow("Asteroids", argv[1], 1024, 768);
+    string str = "../models/";
+    asteroids::MainWindow mainWindow("Asteroids", str, 1024, 768);
+    //asteroids::MainWindow mainWindow("Asteroids", argv[1], 1024, 768);
     mainWindow.execute();
     return 0;
 }

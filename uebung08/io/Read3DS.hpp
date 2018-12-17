@@ -13,13 +13,14 @@
 #ifndef READ3DS_HPP_
 #define READ3DS_HPP_
 
-#include "rendering/TriangleMesh.hpp"
-#include "rendering/TexturedMesh.hpp"
-#include "rendering/Materials.hpp"
+#include "../rendering/TriangleMesh.hpp"
+#include "../rendering/TexturedMesh.hpp"
+#include "../rendering/Materials.hpp"
 
 #include <string>
 #include <vector>
 
+#include "TextureFactory.hpp"
 #include "MeshReader.hpp"
 using std::vector;
 using std::string;

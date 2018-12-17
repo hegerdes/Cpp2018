@@ -1,0 +1,1 @@
+/usr/bin/c++   -O3 -Wall    CMakeFiles/Sum.dir/Aufgabe1_3.cpp.o  -o Sum -rdynamic 

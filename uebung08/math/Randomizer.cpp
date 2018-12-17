@@ -32,6 +32,12 @@ float Randomizer::getRandomNumber(float a, float b)
     return a + (r * rand()/(RAND_MAX+1.0));
 }
 
+int Randomizer::getRandomInt(int a, int b)
+{
+    double r = b - a + 1;
+    return a + (r * rand());
+}
+
 Vector3f Randomizer::getRandomVertex(float range)
 {
     return Vector3f(getRandomNumber(-range, range),

@@ -52,6 +52,7 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED) 
 find_package(JPEG REQUIRED)
+find_package(TIFF REQUIRED)
 
 # Add SDL2 include directory to search path
 include_directories(${SDL2_INCLUDE_DIR})
@@ -64,6 +65,12 @@ endif(OpenGL_FOUND)
 if(GLEW_FOUND)
     include_directories(${GLEW_INCLUDE_DIRS})
 endif(GLEW_FOUND)
+
+if(TIFF_FOUND)
+    link_directories(${TIFF_LIBRARY_DIRS})
+    include_directories(${TIFF_INCLUDE_DIRS})
+endif(TIFF_FOUND)
+
 
 set(Boost_USE_MULTITHREADED     ON)
 
@@ -103,6 +110,9 @@ set(ASTEROID_SOURCES
     io/ReadJPG.cpp
     io/ReadPLY.cpp
     io/Read3DS.cpp
+    io/ReadTIFF.cpp
+    io/TextureFactory.cpp
+    io/TriangleMeshFactory.cpp
     math/Matrix.cpp
     math/Quaternion.cpp
     math/Randomizer.cpp
@@ -133,6 +143,7 @@ set(ASTEROID_DEPENDS
     ${OPENGL_LIBRARY} 
     ${SDL2_LIBRARY}
     ${JPEG_LIBRARIES}
+    ${TIFF_LIBRARIES}
     c3dsreader
 )
 

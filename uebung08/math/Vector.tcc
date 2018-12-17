@@ -108,6 +108,16 @@ Vector<T, L> Vector<T, L>::operator*(const T& scale) const
 	return ret;
 }
 
+template<typename T, int L> void Vector<T,L>::printVector()
+{
+	std::cout << "Vector-Daten: " << std::flush;
+	for(int i = 0; i < L; i++)
+	{
+	    std::cout << m[i] << " " << std::flush;
+	}
+	std::cout << std::endl;
+}
+
 template<typename T, int L>
 void Vector<T, L>::operator+=(const Vector<T, L>& v)
 {

@@ -12,6 +12,7 @@
 #ifndef __SpaceCraft_HPP__
 #define __SpaceCraft_HPP__
 
+#include "../io/TriangleMeshFactory.hpp"
 #include "TriangleMesh.hpp"
 #include <SDL2/SDL.h>
 

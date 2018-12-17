@@ -49,7 +49,7 @@ void Texture::upload()
     // Bind texture, setup parameters and upload it
     // to video memory
     glBindTexture(GL_TEXTURE_2D, m_texIndex);                           // Bind texture
-    std::cout << m_texIndex << std::endl;
+    //std::cout << m_texIndex << std::endl;
     glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);      // Set repeating and filetering
     glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
