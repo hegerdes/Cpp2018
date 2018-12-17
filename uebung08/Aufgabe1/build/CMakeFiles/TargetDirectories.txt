@@ -1,5 +1,0 @@
-/home/hegerdes/Dropbox/Andere Shares/C++/Blatt08/Henrik/Aufgabe1/build/CMakeFiles/rebuild_cache.dir
-/home/hegerdes/Dropbox/Andere Shares/C++/Blatt08/Henrik/Aufgabe1/build/CMakeFiles/StringVector.dir
-/home/hegerdes/Dropbox/Andere Shares/C++/Blatt08/Henrik/Aufgabe1/build/CMakeFiles/edit_cache.dir
-/home/hegerdes/Dropbox/Andere Shares/C++/Blatt08/Henrik/Aufgabe1/build/CMakeFiles/IntVector.dir
-/home/hegerdes/Dropbox/Andere Shares/C++/Blatt08/Henrik/Aufgabe1/build/CMakeFiles/Sum.dir
