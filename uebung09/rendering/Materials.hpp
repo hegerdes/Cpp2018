@@ -12,12 +12,15 @@
 #define MATERIALS_HPP_
 
 #include <list>
+#include "../util/shared_array.hpp"
 using std::list;
 
 namespace asteroids
 {
 
 class Texture;
+
+using TextMeshPtr = shared_array<Texture>;
 
 struct Color
 {
@@ -39,7 +42,7 @@ struct Material
     Color       m_diffuse;
     Color       m_specular;
     float       m_shininess;
-    Texture*    m_texture;
+    TextMeshPtr    m_texture;
 };
 
 struct MaterialFaceList

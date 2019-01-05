@@ -16,6 +16,7 @@ using std::string;
 
 #include <map>
 
+#include "../util/shared_array.hpp"
 #include "rendering/Texture.hpp"
 
 namespace asteroids

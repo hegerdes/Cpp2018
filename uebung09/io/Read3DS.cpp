@@ -155,9 +155,9 @@ void Read3DS::getMesh(TexturedMesh& texMesh)
     }
 
     // Save buffer in mesh
-    texMesh.setVertexBuffer(m_vertexBuffer, m_numVertices);
-    texMesh.setIndexBuffer(m_indexBuffer, m_numFaces);
-    texMesh.setNormalBuffer(m_normalBuffer);
+    texMesh.setVertexBuffer(m_vertexBuffer.get(), m_numVertices);
+    texMesh.setIndexBuffer(m_indexBuffer.get(), m_numFaces);
+    texMesh.setNormalBuffer(m_normalBuffer.get());
     texMesh.setTextureBuffer(textureBuffer);
 
     SDL_RWclose(rw);

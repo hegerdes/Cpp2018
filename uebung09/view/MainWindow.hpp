@@ -19,10 +19,11 @@
 #define GL3_PROTOTYPES 1
 #include <GL/glew.h>
 
-#include "view/Camera.hpp"
+#include "Camera.hpp"
 #include "rendering/SpaceCraft.hpp"
 #include "rendering/Skybox.hpp"
 #include "rendering/AsteroidField.hpp"
+#include "../util/shared_array.hpp"
 
 namespace asteroids
 {
@@ -35,6 +36,10 @@ namespace asteroids
 class MainWindow
 {
 public:
+    using SpaceCraftPtr = shared_array<SpaceCraft>;
+    using SDL_WindowPtr = shared_array<SDL_Window>;
+    using SkyboxPtr = shared_array<Skybox>;
+    using AsteroidFieldPtr = shared_array<AsteroidField>;
 
     /**
      * @brief Construct a new Main Window object
@@ -66,16 +71,16 @@ public:
 private:
 
     /// A pointer to the Actor
-    SpaceCraft*     m_ship;
+    SpaceCraftPtr     m_ship;
 
     /// The virtual camera
     Camera          m_camera;  
 
 	/// A skybox for the scene
-	Skybox*         m_skybox;
+	SkyboxPtr         m_skybox;
 
     /// An AsteroidField
-	AsteroidField*  m_asteroidField;
+	AsteroidFieldPtr  m_asteroidField;
 
     /// The window width
     int             m_width;
@@ -84,7 +89,7 @@ private:
     int             m_height;
 
     /// The SDL Window
-    SDL_Window*     m_sdlWindow;
+    SDL_WindowPtr     m_sdlWindow;
 
     /// The SDL OpenGL rendering context
     SDL_GLContext   m_sdlGlcontext;

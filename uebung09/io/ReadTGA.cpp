@@ -30,19 +30,19 @@ ReadTGA::~ReadTGA()
 {
     if(m_pixels)
     {
-        delete [] m_pixels;
+        delete [] m_pixels.get();
         m_pixels = NULL;
     }
 
     if(m_palette)
     {
-        delete [] m_palette;
+        delete [] m_palette.get();
         m_palette=NULL;
     }
 
     if(m_paletteData)
     {
-        delete [] m_paletteData;
+        delete [] m_paletteData.get();
         m_paletteData=NULL;
     }
 }
@@ -59,13 +59,13 @@ int ReadTGA::load(const char* szFilename)
     // Clear out any existing image and palette
     if(m_pixels)
     {
-        delete [] m_pixels;
-        m_pixels=NULL;
+        delete [] m_pixels.get();
+        m_pixels = NULL;
     }
 
     if(m_palette)
     {
-        delete [] m_palette;
+        delete [] m_palette.get();
         m_palette=NULL;
     }
 
@@ -83,18 +83,18 @@ int ReadTGA::load(const char* szFilename)
     // Allocate some space
     // Check and clear pDat, just in case
     if(m_paletteData)
-        delete [] m_paletteData;
+        delete [] m_paletteData.get();
 
     m_paletteData=new unsigned char[ulSize];
 
-    if(m_paletteData==NULL)
+    if(m_paletteData.get()==NULL)
     {
         fIn.close();
         return IMG_ERR_MEM_FAIL;
     }
 
     // Read the file into memory
-    fIn.read((char*)m_paletteData,ulSize);
+    fIn.read((char*)m_paletteData.get(),ulSize);
 
     fIn.close();
 
@@ -191,7 +191,7 @@ int ReadTGA::load(const char* szFilename)
         FlipImg();
 
     // Release file memory
-    delete [] m_paletteData;
+    delete [] m_paletteData.get();
     m_paletteData=NULL;
 
     return IMG_OK;
@@ -204,7 +204,7 @@ int ReadTGA::readHeader() // Examine the header and populate our class attribute
     short ColMapStart,ColMapLen;
     short x1,y1,x2,y2;
 
-    if(m_paletteData==NULL)
+    if(m_paletteData.get()==NULL)
         return IMG_ERR_NO_FILE;
 
     if(m_paletteData[1]>1)    // 0 (RGB) and 1 (Indexed) are the only types we know about
@@ -265,11 +265,11 @@ int ReadTGA::loadRawData() // Load uncompressed image data
     short iOffset;
 
     if(m_pixels) // Clear old data if present
-        delete [] m_pixels;
+        delete[] m_pixels.get();
 
     m_pixels = new unsigned char[m_imageSize];
 
-    if(m_pixels==NULL)
+    if(m_pixels.get()==NULL)
         return IMG_ERR_MEM_FAIL;
 
     iOffset=m_paletteData[0]+18; // Add header to ident field size
@@ -277,7 +277,7 @@ int ReadTGA::loadRawData() // Load uncompressed image data
     if(m_paletteData[1]==1) // Indexed images
         iOffset+=768;  // Add palette offset
 
-    memcpy(m_pixels,&m_paletteData[iOffset],m_imageSize);
+    memcpy(m_pixels.get(),&m_paletteData[iOffset],m_imageSize);
 
     return IMG_OK;
 }
@@ -305,12 +305,12 @@ int ReadTGA::loadRLEData() // Load RLE compressed image data
     pCur=&m_paletteData[iOffset];
 
     // Allocate space for the image data
-    if(m_pixels!=NULL)
-        delete [] m_pixels;
+    if(m_pixels.get()!=NULL)
+        delete [] m_pixels.get();
 
     m_pixels = new unsigned char[m_imageSize];
 
-    if(m_pixels==NULL)
+    if(m_pixels.get()==NULL)
         return IMG_ERR_MEM_FAIL;
 
     // Decode
@@ -323,7 +323,7 @@ int ReadTGA::loadRLEData() // Load RLE compressed image data
 
             // Repeat the next pixel bLength times
             for(bLoop=0;bLoop!=bLength;++bLoop,Index+=iPixelSize)
-                memcpy(&m_pixels[Index],pCur,iPixelSize);
+                memcpy(&m_pixels.get()[Index],pCur,iPixelSize);
 
             pCur+=iPixelSize; // Move to the next descriptor chunk
         }
@@ -334,7 +334,7 @@ int ReadTGA::loadRLEData() // Load RLE compressed image data
 
             // Write the next bLength pixels directly
             for(bLoop=0;bLoop!=bLength;++bLoop,Index+=iPixelSize,pCur+=iPixelSize)
-                memcpy(&m_pixels[Index],pCur,iPixelSize);
+                memcpy(&m_pixels.get()[Index],pCur,iPixelSize);
         }
     }
 
@@ -351,18 +351,18 @@ int ReadTGA::loadTgaPalette() // Load a 256 color palette
     // Delete old palette if present
     if(m_palette)
     {
-        delete [] m_palette;
+        delete [] m_palette.get();
         m_palette=NULL;
     }
 
     // Create space for new palette
-    m_palette=new unsigned char[768];
+    m_palette = new unsigned char[768];
 
-    if(m_palette==NULL)
+    if(m_palette.get()==NULL)
         return IMG_ERR_MEM_FAIL;
 
     // VGA palette is the 768 bytes following the header
-    memcpy(m_palette,&m_paletteData[m_paletteData[0]+18],768);
+    memcpy(m_palette.get(),&m_paletteData[m_paletteData[0]+18],768);
 
     // Palette entries are BGR ordered so we have to convert to RGB
     for(iIndex=0,iPalPtr=0;iIndex!=256;++iIndex,iPalPtr+=3)
@@ -385,7 +385,7 @@ void ReadTGA::BGRtoRGB() // Convert BGR to RGB (or back again)
     short iPixelSize;
 
     // Set ptr to start of image
-    bCur=m_pixels;
+    bCur=m_pixels.get();
 
     // Calc number of pixels
     nPixels=m_width*m_height;
@@ -413,8 +413,8 @@ void ReadTGA::FlipImg() // Flips the image vertically (Why store images upside d
     int iLineLen,iIndex;
 
     iLineLen=m_width*(m_bpp/8);
-    pLine1=m_pixels;
-    pLine2=&m_pixels[iLineLen * (m_height - 1)];
+    pLine1=m_pixels.get();
+    pLine2=&m_pixels.get()[iLineLen * (m_height - 1)];
 
     for( ;pLine1<pLine2;pLine2-=(iLineLen*2))
     {
@@ -439,7 +439,7 @@ int ReadTGA::getBitsPerPixel()
 unsigned char* ReadTGA::palette()
 
 {
-    return m_palette;
+    return m_palette.get();
 }
 
 }

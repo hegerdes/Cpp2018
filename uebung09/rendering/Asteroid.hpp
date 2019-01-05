@@ -26,6 +26,7 @@ namespace asteroids
 class Asteroid: public Renderable3D
 {
 public:
+    using TexMeshPtr = shared_array<TexturedMesh>;
 
     /**
      * @brief   Ctor.
@@ -53,7 +54,7 @@ public:
 protected:
 
     /// The mesh struture to represent the asteroid
-    TexturedMesh*   m_mesh;
+    TexMeshPtr   m_mesh;
 
     /// Scaling factor
     float           m_scale;

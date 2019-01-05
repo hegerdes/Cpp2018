@@ -64,7 +64,7 @@ void Texture::upload()
             0,
             GL_RGB,
             GL_UNSIGNED_BYTE,
-            m_pixels);
+            m_pixels.get());
 
     GLenum err;
     while((err = glGetError()) != GL_NO_ERROR)

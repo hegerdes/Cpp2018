@@ -173,17 +173,17 @@ TriangleMesh::~TriangleMesh()
 {
     if(m_vertexBuffer)
     {
-        delete[] m_vertexBuffer;
+        delete[] m_vertexBuffer.get();
     }
 
 	if(m_normalBuffer)
 	{
-        delete[] m_normalBuffer;
+        delete[] m_normalBuffer.get();
 	}
 
     if(m_indexBuffer)
     {
-        delete[] m_indexBuffer;
+        delete[] m_indexBuffer.get();
     }
 }
 

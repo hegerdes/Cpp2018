@@ -63,7 +63,7 @@ TexturedMesh::~TexturedMesh()
     }  
 
     // Delelete texture coord arrays
-    delete[] m_textureCoords;
+    delete[] m_textureCoords.get();
 
 }
 

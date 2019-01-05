@@ -75,7 +75,7 @@ SpaceCraft::~SpaceCraft()
 {
     if(m_mesh)
     {
-        delete m_mesh;
+        delete m_mesh.get();
         m_mesh = nullptr;
     }
 }

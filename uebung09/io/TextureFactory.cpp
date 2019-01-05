@@ -14,6 +14,7 @@
 #include "ReadTGA.hpp"
 #include "ReadJPG.hpp"
 #include "BitmapReader.hpp"
+#include "../util/shared_array.hpp"
 
 #include <iostream>
 using std::cout;
@@ -52,6 +53,8 @@ void TextureFactory::setBasePath(const string& base)
 Texture* TextureFactory::getTexture(const string& filename) 
 {
     // A texture object
+    
+    
     Texture* tex = 0;
 
     string tex_filename = m_basePath + filename;

@@ -21,6 +21,7 @@
 
 #include <cassert>
 #include "MeshReader.hpp"
+#include "../util/shared_array.hpp"
 
 using std::ofstream;
 using std::ifstream;
@@ -260,10 +261,10 @@ private:
 	template<typename T>
 	void copyElementToVertexBuffer(char* src, float* buffer, size_t positon);
 
-	float*					m_vertices;
-	float*					m_normals;
-	float*					m_colors;
-	int*			m_indices;
+	floatPtr					m_vertices;
+	floatPtr					m_normals;
+	floatPtr					m_colors;
+	intPtr						m_indices;
 
 	size_t					m_numberOfNormals;
 	size_t					m_numberOfVertices;

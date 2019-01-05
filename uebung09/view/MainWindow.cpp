@@ -37,7 +37,7 @@ MainWindow::MainWindow(
         std::cout << "MainWindow: Unable to create SDL window" << std::endl;
     }
 
-    m_sdlGlcontext = SDL_GL_CreateContext(m_sdlWindow);
+    m_sdlGlcontext = SDL_GL_CreateContext(m_sdlWindow.get());
 
     if(!m_sdlGlcontext)
     {
@@ -66,7 +66,7 @@ MainWindow::MainWindow(
         glewExperimental = GL_TRUE;
         glewInit();
 #endif
-        SDL_GL_SwapWindow(m_sdlWindow);
+        SDL_GL_SwapWindow(m_sdlWindow.get());
 
         // Init OpenGL projection matrix 
         glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -256,7 +256,7 @@ void MainWindow::execute()
             m_ship->render();
             
             // Bring up back buffer 
-		    SDL_GL_SwapWindow(m_sdlWindow);
+		    SDL_GL_SwapWindow(m_sdlWindow.get());
         }
     }
 }
@@ -266,24 +266,24 @@ MainWindow::~MainWindow()
     // Delete stuff
     if(m_ship)
     {
-        delete m_ship;
+        delete m_ship.get();
     }
 
     if(m_skybox)
     {
-        delete m_skybox;
+        delete m_skybox.get();
     }
 
     if(m_asteroidField)
     {
-        delete m_asteroidField;
+        delete m_asteroidField.get();
     }
 
     // Cleanup SDL stuff
 	SDL_GL_DeleteContext(m_sdlGlcontext);
 
 	// Destroy our window 
-	SDL_DestroyWindow(m_sdlWindow);
+	SDL_DestroyWindow(m_sdlWindow.get());
 
 	// Shutdown SDL 2 
 	SDL_Quit();

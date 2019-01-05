@@ -46,9 +46,9 @@ ReadPLY::ReadPLY(const string& filename)
 TriangleMesh* ReadPLY::getMesh()
 {
     TriangleMesh* mesh = new TriangleMesh;
-    mesh->setVertexBuffer(m_vertices, m_numberOfNormals);
-    mesh->setNormalBuffer(m_normals);
-    mesh->setIndexBuffer(m_indices, m_numberOfFaces);
+    mesh->setVertexBuffer(m_vertices.get(), m_numberOfNormals);
+    mesh->setNormalBuffer(m_normals.get());
+    mesh->setIndexBuffer(m_indices.get(), m_numberOfFaces);
 
     return mesh;
 }
@@ -60,7 +60,7 @@ ReadPLY::~ReadPLY()
 
 float* ReadPLY::getVertexArray(size_t &n)
 {
-	if(m_vertices)
+	if(m_vertices.get())
 	{
 		n = m_numberOfVertices;
 	}
@@ -68,7 +68,7 @@ float* ReadPLY::getVertexArray(size_t &n)
 	{
 		n = 0;
 	}
-	return m_vertices;
+	return m_vertices.get();
 }
 
 float* ReadPLY::getNormalArray(size_t &n)
@@ -81,7 +81,7 @@ float* ReadPLY::getNormalArray(size_t &n)
 	{
 		n = 0;
 	}
-	return m_normals;
+	return m_normals.get();
 }
 
 float* ReadPLY::getColorArray(size_t &n)
@@ -94,7 +94,7 @@ float* ReadPLY::getColorArray(size_t &n)
 	{
 		n = 0;
 	}
-	return m_colors;
+	return m_colors.get();
 }
 
 int* ReadPLY::getIndexArray(size_t &n)
@@ -107,7 +107,7 @@ int* ReadPLY::getIndexArray(size_t &n)
 	{
 		n = 0;
 	}
-	return m_indices;
+	return m_indices.get();
 }
 
 void ReadPLY::setVertexArray(float* array, size_t n)
@@ -767,7 +767,7 @@ void ReadPLY::allocVertexBuffers(PLYElement* descr)
 
 	// Allocate memory for vertex positions (always required)
 	m_vertices = new float[3 * m_numberOfVertices];
-	memset(m_vertices, 0, 3 * m_numberOfVertices * sizeof(float));
+	memset(m_vertices.get(), 0, 3 * m_numberOfVertices * sizeof(float));
 
 	// Check if we have to allocate memory for colors: Iterate
 	// through all properties and check if we find a color
@@ -780,7 +780,7 @@ void ReadPLY::allocVertexBuffers(PLYElement* descr)
 		{
 			// Leave loop if a color property was found
 			m_colors = new float[3 * m_numberOfVertices];
-			memset(m_colors, 0, 3 * sizeof(float));
+			memset(m_colors.get(), 0, 3 * sizeof(float));
 			break;
 		}
 	}
@@ -791,25 +791,25 @@ void ReadPLY::deleteBuffers()
 
 	if(m_vertices)
 	{
-		delete[] m_vertices;
+		delete[] m_vertices.get();
 		m_vertices = 0;
 	}
 
 	if(m_colors)
 	{
-		delete[] m_colors;
+		delete[] m_colors.get();
 		m_colors = 0;
 	}
 
 	if(m_indices)
 	{
-		delete[] m_indices;
+		delete[] m_indices.get();
 		m_indices = 0;
 	}
 
 	if(m_normals)
 	{
-		delete[] m_normals;
+		delete[] m_normals.get();
 		m_normals = 0;
 	}
 }
@@ -887,27 +887,27 @@ void ReadPLY::readVerticesBinary(ifstream &in, PLYElement* descr)
 			Property* p = *it;
 			if(p->getName() == "x")
 			{
-				copyElementToVertexBuffer(in, p, m_vertices,  i * 3);
+				copyElementToVertexBuffer(in, p, m_vertices.get(),  i * 3);
 			}
 			else if(p->getName() == "y")
 			{
-				copyElementToVertexBuffer(in, p, m_vertices, i * 3 + 1);
+				copyElementToVertexBuffer(in, p, m_vertices.get(), i * 3 + 1);
 			}
 			else if(p->getName() == "z")
 			{
-				copyElementToVertexBuffer(in, p, m_vertices, i * 3 + 2);
+				copyElementToVertexBuffer(in, p, m_vertices.get(), i * 3 + 2);
 			}
 			else if(p->getName() == "r")
 			{
-				copyElementToVertexBuffer(in, p, m_colors, i * 3);
+				copyElementToVertexBuffer(in, p, m_colors.get(), i * 3);
 			}
 			else if(p->getName() == "g")
 			{
-				copyElementToVertexBuffer(in, p, m_colors, i * 3 + 1);
+				copyElementToVertexBuffer(in, p, m_colors.get(), i * 3 + 1);
 			}
 			else if(p->getName() == "b")
 			{
-				copyElementToVertexBuffer(in, p, m_colors, i * 3 + 2);
+				copyElementToVertexBuffer(in, p, m_colors.get(), i * 3 + 2);
 			}
 		}
 //				cout << m_vertices[i    ] << " "
@@ -919,16 +919,16 @@ void ReadPLY::readVerticesBinary(ifstream &in, PLYElement* descr)
 
 float** ReadPLY::getIndexedVertexArray(size_t& n)
 {
-	assert(m_vertices);
+	assert(m_vertices.get());
 	n = m_numberOfVertices;
-	return interlacedBufferToIndexedBuffer(m_vertices, m_numberOfVertices);
+	return interlacedBufferToIndexedBuffer(m_vertices.get(), m_numberOfVertices);
 }
 
 float** ReadPLY::getIndexedNormalArray(size_t& n)
 {
 	assert(m_normals);
 	n = m_numberOfNormals;
-	return interlacedBufferToIndexedBuffer(m_normals, m_numberOfNormals);
+	return interlacedBufferToIndexedBuffer(m_normals.get(), m_numberOfNormals);
 }
 
 void ReadPLY::readNormalsBinary(ifstream &in, PLYElement* descr)
@@ -937,7 +937,7 @@ void ReadPLY::readNormalsBinary(ifstream &in, PLYElement* descr)
 	m_numberOfNormals= descr->getCount();
 
 	// Allocate memory for normals
-	if(m_normals) delete[] m_normals;
+	if(m_normals) delete[] m_normals.get();
 	m_normals = new float[3 * m_numberOfNormals];
 
 	// Read all normals
@@ -950,15 +950,15 @@ void ReadPLY::readNormalsBinary(ifstream &in, PLYElement* descr)
 			Property* p = *it;
 			if( (p->getName() == "x") || (p->getName() == "nx") )
 			{
-				copyElementToVertexBuffer(in, p, m_normals,  i * 3);
+				copyElementToVertexBuffer(in, p, m_normals.get(),  i * 3);
 			}
 			else if( (p->getName() == "y") || (p->getName() == "ny"))
 			{
-				copyElementToVertexBuffer(in, p, m_normals, i * 3 + 1);
+				copyElementToVertexBuffer(in, p, m_normals.get(), i * 3 + 1);
 			}
 			else if( (p->getName() == "z") || (p->getName() == "nz"))
 			{
-				copyElementToVertexBuffer(in, p, m_normals, i * 3 + 2);
+				copyElementToVertexBuffer(in, p, m_normals.get(), i * 3 + 2);
 			}
 		}
 	}
@@ -967,11 +967,11 @@ void ReadPLY::readNormalsBinary(ifstream &in, PLYElement* descr)
 void ReadPLY::readNormalsASCII(ifstream &in, PLYElement* descr)
 {
 	// Get count and alloc memory
-	if(m_normals) delete[] m_normals;
+	if(m_normals) delete[] m_normals.get();
 	m_numberOfNormals = descr->getCount();
 
 	m_normals = new float[3 * m_numberOfNormals];
-	memset(m_normals, 0, 3 * m_numberOfNormals * sizeof(float));
+	memset(m_normals.get(), 0, 3 * m_numberOfNormals * sizeof(float));
 
 	// Read all normals
 	vector<Property*>::iterator it;
@@ -1420,7 +1420,7 @@ void ReadPLY::setIndexedVertexArray(float** arr, size_t vertex_count)
 
 void ReadPLY::setIndexedNormalArray(float** arr, size_t count)
 {
-	if(m_normals) delete[] m_normals;
+	if(m_normals) delete[] m_normals.get();
 	m_normals = indexedBufferToInterlacedBuffer(arr, count);
 	m_numberOfNormals = count;
 }

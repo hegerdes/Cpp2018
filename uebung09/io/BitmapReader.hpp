@@ -13,12 +13,17 @@
 #ifndef BITMAPREADER_HPP_
 #define BITMAPREADER_HPP_
 
+#include "../util/shared_array.hpp"
+
 namespace asteroids
 {
 
 class BitmapReader
 {
 public:
+	using uChrPtr = shared_array<unsigned char>;
+	using intPtr = shared_array<int>;
+	using floatPtr = shared_array<float>;
 
 	/***
 	 * @brief Constructor
@@ -33,7 +38,7 @@ public:
 	/***
 	 * @brief Returns the bitmaps pixel array. Three bytes per pixel in RGB order
 	 */
-	virtual unsigned char* getPixels() { return m_pixels;}
+	virtual unsigned char* getPixels() { return m_pixels.get();}
 
 	/***
 	 * @brief Returns the width of the image.
@@ -48,7 +53,7 @@ public:
 protected:
 
 	/// Pixel array
-	unsigned char*			m_pixels;
+	uChrPtr					m_pixels;
 
 	/// Image width
 	int						m_width;

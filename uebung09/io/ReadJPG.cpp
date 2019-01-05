@@ -61,7 +61,7 @@ ReadJPG::~ReadJPG()
 {
     if(m_pixels)
     {
-        delete [] m_pixels;
+        delete [] m_pixels.get();
         m_pixels = nullptr;
     }
 }

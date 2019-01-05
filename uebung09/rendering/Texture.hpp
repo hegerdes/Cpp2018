@@ -13,6 +13,7 @@
 #define TEXTURE_HPP_
 
 #include <string>
+#include "../util/shared_array.hpp"
 using std::string;
 
 #ifdef __APPLE__
@@ -24,9 +25,13 @@ using std::string;
 namespace asteroids
 {
 
+
 class Texture
 {
 public:
+
+    //For shorter code
+    using ucharptr = shared_array<unsigned char>;
 
     /**
      * @brief   Initializes a texture with given date. Class
@@ -69,7 +74,8 @@ private:
     int                 m_height;
 
     /// The aligned pixel data. Three bytes per pixel (r,g,b)
-    unsigned char*      m_pixels;
+    
+    ucharptr     m_pixels;
 
     /// The texture index of the texture
     GLuint              m_texIndex;

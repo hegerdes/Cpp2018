@@ -31,6 +31,7 @@ namespace asteroids
 class TexturedMesh : public TriangleMesh
 {
 public:
+    using floatPtr = shared_array<float>;
 
     /**
      * @brief   Ctor
@@ -81,7 +82,7 @@ private:
     MaterialFaceLists   m_matFaceLists;
 
     /// Texture coordinate buffer
-    float*              m_textureCoords;
+    floatPtr              m_textureCoords;
 
 
 

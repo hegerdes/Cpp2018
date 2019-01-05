@@ -24,6 +24,8 @@ namespace asteroids
 class SpaceCraft 
 {
 public:
+
+    using TriMeshPtr = shared_array<TriangleMesh>;
     /**
      * @brief Construct a new SpaceCraft object
      * 
@@ -56,7 +58,7 @@ public:
     bool hasMesh() const;
 
 private:
-    TriangleMesh* m_mesh;
+    TriMeshPtr m_mesh;
     float m_movespeed;
     float m_rotatespeed;
 };

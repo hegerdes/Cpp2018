@@ -9,6 +9,7 @@
 #define MESHIO_H_
 
 #include "rendering/TriangleMesh.hpp"
+#include "../util/shared_array.hpp"
 
 namespace asteroids
 {
@@ -19,6 +20,10 @@ namespace asteroids
 class MeshReader
 {
 public:
+
+    using floatPtr = shared_array<float>;
+    using intPtr = shared_array<int>;
+
     MeshReader()
         : m_vertexBuffer(0),  // Initit all members with zero pointers
           m_normalBuffer(0),
@@ -40,13 +45,13 @@ public:
 protected:
 
     /// Vertex position information
-    float*  m_vertexBuffer;
+    floatPtr  m_vertexBuffer;
 
     /// Vertex normal information
-    float*  m_normalBuffer;
+    floatPtr  m_normalBuffer;
 
     /// Triangle definitions
-    int*    m_indexBuffer;
+    intPtr    m_indexBuffer;
 
     /// Number of vertices in mesh
     int     m_numVertices;

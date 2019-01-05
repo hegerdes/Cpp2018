@@ -19,6 +19,8 @@ namespace asteroids
 {
 class MainWindow;
 
+using MainWinPtr = shared_array<MainWindow>;
+
 /**
  * @brief   A class to represent objects that are rendered
  *          in screen space
@@ -60,7 +62,8 @@ protected:
 
     /// Pointer to a main window instance that displays
     /// this renderable
-    MainWindow* m_mainWindow;
+    
+    MainWinPtr m_mainWindow;
 };
 
 

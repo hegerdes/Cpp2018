@@ -12,6 +12,8 @@
 #ifndef __RENDERABLE_HPP__
 #define __RENDERABLE_HPP__
 
+#include "../util/shared_array.hpp"
+
 namespace asteroids
 {
     

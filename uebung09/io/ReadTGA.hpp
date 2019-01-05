@@ -30,6 +30,7 @@ using std::string;
 #define IMG_ERR_UNSUPPORTED 0x40
 
 #include "BitmapReader.hpp"
+#include "../util/shared_array.hpp"
 
 namespace asteroids
 {
@@ -37,6 +38,10 @@ namespace asteroids
 class ReadTGA : public BitmapReader
 {
 public:
+
+	using uChrPtr = shared_array<unsigned char>;
+	using intPtr = shared_array<int>;
+	using floatPtr = shared_array<float>;
 
 	/**
 	 * @brief Constructor
@@ -81,10 +86,11 @@ private:
     char            m_enc;
 
     /// Color palette definitions
-    unsigned char*  m_palette;
+    
+    uChrPtr  m_palette;
 
     /// Color palette data
-    unsigned char*  m_paletteData;
+    uChrPtr  m_paletteData;
 
     // Internal workers
     int readHeader();

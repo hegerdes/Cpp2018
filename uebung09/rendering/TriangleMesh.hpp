@@ -28,6 +28,9 @@ class TriangleMesh : public Renderable3D
 {
 public:
 
+    using floatPtr = shared_array<float>;
+    using intPtr = shared_array<int>;
+
     TriangleMesh();
 
     /**
@@ -113,13 +116,13 @@ protected:
     int         m_numFaces;
 
     /// Vertexbuffer
-    float*      m_vertexBuffer;
+    floatPtr      m_vertexBuffer;
 
     /// Normalbuffer
-    float*      m_normalBuffer;
+    floatPtr      m_normalBuffer;
 
     /// Indexbuffer
-    int*        m_indexBuffer;
+    intPtr        m_indexBuffer;
 
     
 };
