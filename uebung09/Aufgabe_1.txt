@@ -1,0 +1,30 @@
+1. Es sollen alle geraden Zahlen aus dem Vektor entfernt werden. Dazu
+wird ein Interator und remove_if benutzt
+
+
+2. Bind erwartet einen Funktionspointer oder Funktionsobjekt als ersten
+Parameter, dieser ist bei den inneren beiden bind Aufrufe mit den 
+Funktionen equal_to und modulus gegeben.
+Als weitere Parameter erwartet bind eine Liste an beibig vielen Parametern.
+Diese werden an das Funktionsobjekt übergeben. Diese Parameter können 
+konkrete Werte wie 0 und 2 sein oder Platzhalter wie _1.
+Das dritte bind soll alle Elemente im Vector an modulus mit 2 binden.
+Das zweite bind soll dann prüfen ob die mit modulus verarbeiteten Elemente = 0 sind.
+Die verarbeiteten Elemente soll das zweite bind vom ersten bind bekommen.
+Dieses gibt dann eine Rückgabe, die ein gültiges Argument für remove_if ist.
+
+Bsp:
+->  bind(equal_to<int>(),_1,0)      //Liefert True wenn für den Platzhalter _1 0 eingesetzt wird.
+->  bind(modulus<int>(),_1,2)       //Für alle Paltzhaltwer wird %2 berechnet
+
+3. Der return-value von 'remove_if' der in der Variable 'it' gespeichert wird und das neue Ende des Vektors angibt muss für die Ausgabe in der vorletzten Zeile genutzt werden: 
+
+vector<int> v = {1, 4, 2, 8, 5, 7};
+
+copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
+cout << endl;
+
+auto it = remove_if(v.begin(), v.end(),bind(bind(equal_to<int>(),_1, 0),bind(modulus<int>(), _1, 2)));
+
+copy(v.begin(), it, ostream_iterator<int>(cout, " "));
+cout << endl;

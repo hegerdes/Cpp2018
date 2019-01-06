@@ -24,6 +24,8 @@ namespace asteroids
 
 class TextureFactory
 {
+
+using TextPtr = shared_array<Texture>;
 protected:
 
     /**

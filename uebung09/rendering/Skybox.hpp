@@ -46,9 +46,12 @@ public:
     virtual void render(Camera& cam);
 
 private:
+using TexturePtr = shared_array<Texture*>;
+
 
     /// An array containing the sykbox textures
-    Texture**       m_textures;
+    TexturePtr       m_textures;
+    //Texture**       m_textures;
 
     /// The with of the Skybox
     int             m_width;

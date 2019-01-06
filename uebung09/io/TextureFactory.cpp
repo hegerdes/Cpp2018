@@ -23,6 +23,10 @@ using std::endl;
 namespace asteroids
 {
 
+using uCharPtr = shared_array<unsigned char>;
+using textPtr = shared_array<Texture>;
+using BitmapReadPtr = shared_array<BitmapReader>;
+
 std::map<string, Texture*> TextureFactory::m_loadedTextures;
 
 string TextureFactory::m_basePath;
@@ -55,7 +59,7 @@ Texture* TextureFactory::getTexture(const string& filename)
     // A texture object
     
     
-    Texture* tex = 0;
+    textPtr tex;
 
     string tex_filename = m_basePath + filename;
 
@@ -65,8 +69,8 @@ Texture* TextureFactory::getTexture(const string& filename)
         // Texture data
         int width = 0;
         int height = 0;
-        unsigned char* data = 0;
-        BitmapReader* reader = 0;
+        uCharPtr data;
+        BitmapReadPtr reader;
 
         // Get file extension
         if(filename.substr(filename.find_last_of(".") + 1) == "ppm")
@@ -90,20 +94,17 @@ Texture* TextureFactory::getTexture(const string& filename)
         }
 
         // Check data and create new texture if possible
-        if(data != 0 && width != 0 && height != 0)
+        if(data.get() != 0 && width != 0 && height != 0)
         {
-            tex = new Texture(data, width, height);
-            m_loadedTextures[tex_filename] = tex;
+            tex = new Texture(data.get(), width, height);
+            m_loadedTextures[tex_filename] = tex.get();
         }
         else
         {
             cout << "TextureFactory: Unable to read file " << tex_filename << "." << endl;
         }
 
-        
-        
-        delete reader;
-        return tex;
+        return tex.get();
     }
     else
     {

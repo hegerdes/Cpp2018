@@ -310,10 +310,11 @@ void ReadOBJ::getMesh(TexturedMesh& texMesh)
 
 TriangleMesh* ReadOBJ::getMesh()
 {
-    TexturedMesh* mesh = new TexturedMesh;
+	shared_array<TexturedMesh> mesh = new TexturedMesh;
+    //TexturedMesh* mesh = new TexturedMesh;
 	getMesh(*mesh);
 
-	return mesh;
+	return mesh.get();
 }
 
 } // Namespace lvr

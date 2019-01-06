@@ -7,6 +7,7 @@ cmake_minimum_required(VERSION 3.0.2)
 # The name of out project
 ###############################################################################
 project(CPP18_ASTEROIDS)
+project(CPP18_FUNCTIONALS)
 
 ###############################################################################
 # Now you would normally declare additional linker and include directories.
@@ -36,6 +37,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set( CMAKE_CXX_FLAGS         "-O3 -Wall" )
 set( CMAKE_CXX_FLAGS_RELEASE "-O3 -msse3 -Wno-deprecated-declarations -Wno-unused -Wcpp" )
 set( CMAKE_CXX_FLAGS_DEBUG   "-g -Wall" )
+set( CMAKE_CXX_STANDARD 11)
+set( CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ###############################################################################
 # Find required libraries.Right now we need glut and OpenGL. The required 
@@ -93,6 +96,8 @@ add_subdirectory(ext/load3ds)
 # and you can reuse it for several targets (maybe you want to build a library
 # some day ;-)
 ###############################################################################
+set(FUNCTIONALS_SOURCES
+    Functionals.cpp)
 
 set(ASTEROID_SOURCES
     Main.cpp
@@ -144,6 +149,7 @@ set(ASTEROID_DEPENDS
 ###############################################################################
 
 add_executable(asteroids ${ASTEROID_SOURCES} ${C3DSREADER_SOURCES})
+add_executable(functionals ${FUNCTIONALS_SOURCES})
 
 ###############################################################################
 # External library dependencys

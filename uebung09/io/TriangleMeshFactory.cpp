@@ -21,38 +21,37 @@ using std::endl;
 namespace asteroids
 {
 
+using MeshReaderPtr = shared_array<MeshReader>;
+using PlyReaderPtr = shared_array<ReadPLY>;
+using DSReaderPtr = shared_array<Read3DS>;
+using OBJReaderPtr = shared_array<ReadOBJ>;
+using TriMeshPtr = shared_array<TriangleMesh>;
+
 TriangleMesh* TriangleMeshFactory::getMesh(const string &filename) const
 {
     // A mesh pointer and MeshIO pointer
-    MeshReader* io = 0;
-    TriangleMesh* mesh = 0;
+    //MeshReaderPtr io;
+    TriMeshPtr mesh;
 
     // Get file extension
     if(filename.substr(filename.find_last_of(".") + 1) == "ply")
     {
-        io = new ReadPLY(filename);
+        PlyReaderPtr io = new ReadPLY(filename);
+        mesh = io->getMesh();
     }
     else if(filename.substr(filename.find_last_of(".") + 1) == "3ds")
     {
-        io = new Read3DS(filename);
+        DSReaderPtr io = new Read3DS(filename);
+        mesh = io->getMesh();
     }
     else if(filename.substr(filename.find_last_of(".") + 1) == "obj")
     {
-        io = new ReadOBJ(filename);
-    }
-
-    // Get mesh from io
-    if(io)
-    {
+        OBJReaderPtr io = new ReadOBJ(filename);
         mesh = io->getMesh();
     }
-    else
-    {
-        cout << "Unable to parse file " << filename << "." << endl;
-    }
     
-    delete io;
-    return mesh;
+
+    return mesh.get();
 }
 
 TriangleMeshFactory& TriangleMeshFactory::instance()

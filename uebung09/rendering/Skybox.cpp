@@ -37,7 +37,7 @@ Skybox::~Skybox()
     			delete m_textures[i];
     		}
     	}
-    	delete[] m_textures;
+    	//delete[] m_textures;
     	m_textures = 0;
     }
 }

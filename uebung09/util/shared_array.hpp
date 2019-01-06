@@ -13,20 +13,14 @@ template<typename T> class shared_array : public std::shared_ptr<T>
 	 * @brief Construct a new shared array object
 	 * 
 	 */
-	shared_array():std::shared_ptr<T>()
-	{
-
-	}
+	shared_array();
 
 	/**
 	 * @brief Construct a new shared array object
 	 * 
 	 * @param arr 
 	 */
-	shared_array(T* arr):std::shared_ptr<T>(arr, [](T* p){})
-	{
-
-	}
+	shared_array(T* arr);
 
 	operator T()
 	{
@@ -36,21 +30,15 @@ template<typename T> class shared_array : public std::shared_ptr<T>
     /**
 	 * @brief	Indexed element (reading) access.
 	 */
-    T& operator[](const int index)
-	{
-		return this->get()[index];
-	}
+    T& operator[](const int index);
+
 
 	/**
 	 * @brief	Indexed element (reading) access.
 	 */
-    T operator[](const int index) const
-	{
-		return this->get()[index];
-	}
+    T operator[](const int index) const;
 
 	// a lamda array deleter:
-	//template <typename T>
 	struct Del {    
 		void operator()(T* p) 
 		{
@@ -61,5 +49,5 @@ template<typename T> class shared_array : public std::shared_ptr<T>
 
 }; //asteroids
 
-//#include "shared_array.tcc"
+#include "shared_array.tcc"
 #endif
