@@ -1,0 +1,10 @@
+#Ignore all Files in heare
+
+#CPP - Files
+.o
+.out
+
+#Build Folder
+
+*/Build/*
+*/build/*
