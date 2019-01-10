@@ -110,9 +110,6 @@ Texture* TextureFactory::getTexture(const string& filename)
     {
         return m_loadedTextures[tex_filename];
     }
-
-   
 }
-
-}
+}//asteroids
 

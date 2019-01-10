@@ -59,8 +59,6 @@ public:
     static TextureFactory& instance();
 
     static string m_basePath;
-
-    
 };
 
 }
