@@ -33,7 +33,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 # special optimization flags
 ###############################################################################
 
-set( CMAKE_CXX_FLAGS         "-O3 -Wall" )
+set( CMAKE_CXX_FLAGS         "-pthread -O3 -Wall" )
 set( CMAKE_CXX_FLAGS_RELEASE "-O3 -msse3 -Wno-deprecated-declarations -Wno-unused -Wcpp" )
 set( CMAKE_CXX_FLAGS_DEBUG   "-g -Wall" )
 
@@ -143,6 +143,9 @@ set(ASTEROID_DEPENDS
 # The executable fpr our project
 ###############################################################################
 
+add_executable(Counter-Mutex Aufgabe10.1/thread1.cpp)
+add_executable(Counter-Atomic Aufgabe10.1/thread2.cpp)
+add_executable(Counter-Tasks Aufgabe10.1/thread3.cpp)
 add_executable(asteroids ${ASTEROID_SOURCES} ${C3DSREADER_SOURCES})
 
 ###############################################################################
