@@ -10,6 +10,7 @@
  */
 
 #include "SpaceCraft.hpp"
+#include "Bullet.hpp"
 #include "io/TriangleMeshFactory.hpp"
 
 namespace asteroids
@@ -59,11 +60,30 @@ void SpaceCraft::handleKeyInput(const Uint8* keyStates)
     {
         m_mesh->move(TriangleMesh::STRAFE, m_movespeed);
     }
+    if (keyStates[SDL_SCANCODE_SPACE])
+    {
+        shoot();
+    }
 }
 
 void SpaceCraft::render()
 {
     m_mesh->render();
+
+    auto it = m_bullets.begin();
+
+    while(it!=m_bullets.end())
+    {
+        if(it->get()->isAlive())
+        {
+            it->get()->render();
+        }
+        else
+        {
+            m_bullets.erase(it);
+        }
+        
+    }
 }
 
 bool SpaceCraft::hasMesh() const
