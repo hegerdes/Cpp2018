@@ -5,14 +5,15 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include",
-                "/usr/local/include"
+                "/usr/local/include",
+                "${workspaceFolder}/uebung10"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c99",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64"
-        },    
+        },
         {
             "name": "Win32",
             "includePath": [
