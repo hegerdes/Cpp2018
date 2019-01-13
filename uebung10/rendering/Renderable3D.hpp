@@ -56,6 +56,10 @@ public:
 
     void setPosition(const Vector3f& pos);
 
+    Vector3f& getPosition();
+
+    Vector3f& getxAxis();
+
 protected:
 
     /// Initializes the transformations
