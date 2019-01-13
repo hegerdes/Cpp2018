@@ -11,6 +11,7 @@
 
 #include "SpaceCraft.hpp"
 #include "Bullet.hpp"
+#include <iterator>
 #include "io/TriangleMeshFactory.hpp"
 
 namespace asteroids
@@ -62,6 +63,7 @@ void SpaceCraft::handleKeyInput(const Uint8* keyStates)
     }
     if (keyStates[SDL_SCANCODE_SPACE])
     {
+        std::cout << "Fire" << std::endl;
         shoot();
     }
 }
@@ -70,9 +72,10 @@ void SpaceCraft::render()
 {
     m_mesh->render();
 
-    auto it = m_bullets.begin();
+    //std::list<Bullet::Ptr>::iterator it = m_bullets.begin();
 
-    while(it!=m_bullets.end())
+    for(std::list<Bullet::Ptr>::iterator it = m_bullets.begin(); it != m_bullets.end(); ++it)
+    //for(auto const &it : m_bullets)
     {
         if(it->get()->isAlive())
         {
@@ -80,9 +83,9 @@ void SpaceCraft::render()
         }
         else
         {
-            m_bullets.erase(it);
+            //it->get()->stop();
+            //m_bullets.erase(it);
         }
-        
     }
 }
 
@@ -93,7 +96,11 @@ bool SpaceCraft::hasMesh() const
 
 void SpaceCraft::shoot()
 {
-    m_bullets.push_back(Bullet::Ptr(new Bullet(m_mesh->getPosition(),m_mesh->getxAxis())));
+    Bullet::Ptr b(new Bullet(m_mesh->getPosition(),m_mesh->getxAxis()));
+
+    b->start();
+    
+    m_bullets.push_back(b);
 }
 
 SpaceCraft::~SpaceCraft()
