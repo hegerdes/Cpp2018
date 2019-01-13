@@ -40,6 +40,16 @@ void Renderable3D::setPosition(const Vector3f& pos)
 	m_position = pos;
 }
 
+Vector3f& Renderable3D::getPosition()
+{
+	return m_position;
+}
+
+Vector3f& Renderable3D::getxAxis()
+{
+	return m_xAxis;
+}
+
 void Renderable3D::rotate(ACTION axis, float s)
 {
     Quaternion nq;
