@@ -71,6 +71,11 @@ bool SpaceCraft::hasMesh() const
     return m_mesh != nullptr;
 }
 
+void SpaceCraft::shoot()
+{
+    m_bullets.push_back(Bullet::Ptr(new Bullet(m_mesh->getPosition(),m_mesh->getxAxis())));
+}
+
 SpaceCraft::~SpaceCraft()
 {
  
