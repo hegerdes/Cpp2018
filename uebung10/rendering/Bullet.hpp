@@ -12,6 +12,8 @@
 #ifndef BULLET_HPP_
 #define BULLET_HPP_
 
+#include <memory>
+#include <thread>
 #include "../math/Vector.hpp"
 #include "Sphere.hpp"
 
@@ -64,12 +66,27 @@ public:
      * @brief Returns the status of this bullet.
      * @return false, if the bullet's lifetime is over and true otherwise
      */
-	bool isAlive();
+	inline bool isAlive()
+    {
+        return m_alive;
+    };
 
 private:
 
-    // TODO: ADD NEEDED CLASS ELEMENTS TO IMPLEMENT
-    // THE REQUIRED FUCTIONALITIES
+    //Liftime
+    const static int m_lifetime = 900;
+
+    // Tells if bullit is vlaid
+    bool m_alive;
+
+    //Axis
+    Vector3f m_flightAxis;
+
+    //Spaceship position
+    Vector3f m_fighter_position;
+
+    //Tread for bullet
+    thread m_thread;
 
     /// Sphere objet to render the bullet
     Sphere m_sphere;
