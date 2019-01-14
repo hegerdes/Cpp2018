@@ -33,8 +33,6 @@ void Bullet::run()
     // Modify the bullet's position until the lifetime is over
 	while(i < Bullet::m_lifetime){
 
-        // Vector3f pos = m_sphere.getPosition() + m_flightAxis;
-        // pos.invert();
         //m_sphere.move(Renderable3D::ACCEL, 5);
         m_sphere.setPosition(m_sphere.getPosition() + m_flightAxis);
 		
