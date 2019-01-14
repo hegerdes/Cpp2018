@@ -145,7 +145,7 @@ set(ASTEROID_DEPENDS
 ###############################################################################
 
 add_executable(Counter-Mutex Aufgabe10.1/thread1.cpp)
-#add_executable(Counter-Atomic Aufgabe10.1/thread2.cpp)
+add_executable(Counter-Atomic Aufgabe10.1/thread2.cpp)
 add_executable(Counter-Tasks Aufgabe10.1/thread3.cpp)
 add_executable(asteroids ${ASTEROID_SOURCES} ${C3DSREADER_SOURCES})
 
