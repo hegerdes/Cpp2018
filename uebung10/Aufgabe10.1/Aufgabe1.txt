@@ -1,0 +1,18 @@
+Eine Race Condition ist eine Situation, in der mehrere Prozesse
+konkurrierend auf gemeinsame Daten zugreifen, hier square_sum, 
+und mindestenseiner diese manipuliert. Der letztendliche Wert 
+der gemeinsamen Daten hängt davon ab, in welcher Reihenfolge 
+die Prozesse darauf zugreifen. Das Ergebnis ist also nicht 
+vorhersagbar und kann bei überlappenden Zugriffen falsch sein.
+
+Der Ausdruck "square_sum += x * x" ist nur eine verkürtzte
+Schreibweise für square_sum = square_sum + x * x. Somit kommen
+hier scheibende und lesende Zugriffe vor.
+
+Beispielhafter Ablauf im Fehlerfall:
+Thread 1 liest square_sum                               square_sum = 0
+Thread 2 liest square_sum                               square_sum = 0
+Thread 1 berechnet und schreibt square_sum + 1 * 1      square_sum = 1
+Thread 2 berechnet und schreibt square_sum + 2 * 2      square_sum = 4
+
+Die Berechnung von Thread 1 wurde Überschieben (Lost Update)
