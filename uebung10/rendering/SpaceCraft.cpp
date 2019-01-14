@@ -12,6 +12,7 @@
 #include "SpaceCraft.hpp"
 #include "Bullet.hpp"
 #include <iterator>
+#include <algorithm>
 #include "io/TriangleMeshFactory.hpp"
 
 namespace asteroids
@@ -71,8 +72,18 @@ void SpaceCraft::render()
 {
     m_mesh->render();
 
+    // for(auto const &b:m_bullets)
+    // {
+    //     b->render();
+    // }
+
+    // auto it = remove_if(m_bullets.begin(), m_bullets.end(), [](Bullet::Ptr b)->bool{
+    //     return !(b->isAlive());
+    // });
+
+    // m_bullets.erase(it,m_bullets.end());
+
     for(std::list<Bullet::Ptr>::iterator it = m_bullets.begin(); it != m_bullets.end(); ++it)
-    //for(auto const &it : m_bullets)
     {
         if(it->get()->isAlive())
         {
@@ -80,7 +91,7 @@ void SpaceCraft::render()
         }
         else
         {
-            //m_bullets.erase(it);
+            //it = m_bullets.erase(it, m_bullets.end());
         }
     }
 }
@@ -101,6 +112,10 @@ void SpaceCraft::shoot()
 
 SpaceCraft::~SpaceCraft()
 {
+    for(auto th:m_bullets)
+    {
+        th->stop();
+    }
  
 }
 
