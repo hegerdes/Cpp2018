@@ -63,7 +63,6 @@ void SpaceCraft::handleKeyInput(const Uint8* keyStates)
     }
     if (keyStates[SDL_SCANCODE_SPACE])
     {
-        std::cout << "Fire" << std::endl;
         shoot();
     }
 }
@@ -96,7 +95,7 @@ bool SpaceCraft::hasMesh() const
 
 void SpaceCraft::shoot()
 {
-    Bullet::Ptr b(new Bullet(m_mesh->getPosition(),m_mesh->getxAxis()));
+    Bullet::Ptr b(new Bullet(m_mesh->getPosition(),m_mesh->getxAxis() * -1.0));
 
     b->start();
     
