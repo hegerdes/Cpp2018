@@ -116,5 +116,14 @@ void Vector<T, L>::operator+=(const Vector<T, L>& v)
 		m[i] += v.m[i];
 	}
 }
+
+template<typename T, int L>
+void Vector<T, L>::invert()
+{
+	for(int i = 0; i < L; i++)
+	{
+		m[i] = m[i] * -1;
+	}
+}
     
 } // namespace asteroids

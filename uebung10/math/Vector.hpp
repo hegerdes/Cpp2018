@@ -85,6 +85,12 @@ public:
 	 */
 	void operator+= (const Vector<T, L>& v);
 
+	/**
+	 * @brief Inverts all Numbers
+	 * 
+	 */
+	void invert();
+
 protected:
 	 /**
 	 * @brief   The internal values of the vector
