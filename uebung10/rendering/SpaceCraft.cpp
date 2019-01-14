@@ -71,8 +71,6 @@ void SpaceCraft::render()
 {
     m_mesh->render();
 
-    //std::list<Bullet::Ptr>::iterator it = m_bullets.begin();
-
     for(std::list<Bullet::Ptr>::iterator it = m_bullets.begin(); it != m_bullets.end(); ++it)
     //for(auto const &it : m_bullets)
     {
@@ -82,7 +80,6 @@ void SpaceCraft::render()
         }
         else
         {
-            //it->get()->stop();
             //m_bullets.erase(it);
         }
     }
