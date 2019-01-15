@@ -263,7 +263,7 @@ private:
 	float*					m_vertices;
 	float*					m_normals;
 	float*					m_colors;
-	int*			m_indices;
+	int*					m_indices;
 
 	size_t					m_numberOfNormals;
 	size_t					m_numberOfVertices;
