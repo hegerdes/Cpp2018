@@ -3,7 +3,11 @@
 
 #include <string>
 #include <list>
+#include <map>
+#include <vector>
+#include <iomanip>
 #include "math/Vector.hpp"
+#include "SharedArray.hpp"
 
 
 namespace asteroids
@@ -30,11 +34,35 @@ class PathPlanner {
      * @return A shortest path from s to e
      */
 
-    std::list<Vector<float> > getPath(Vector<float> position, std::string s, std::string e);
+    std::list<Vector3f> getPath(Vector3f position, std::string s, std::string e);
+
+    /**
+     * @brief Prints the file content to stdout
+     * 
+     */
+    void print();
+
+  private:
+
+    //Number of Planets
+    int m_numofindices;
+
+    //Store tupel for faces
+    std::vector<int> m_faces;
+
+    //store vertex
+    std::vector<int> m_vertex;
+
+    //Map to match the Names to a Index
+    std::map<std::string,int> m_planatdir;
+
+
+
+
   
 };
 
-}
+}//astorids
 
 
 
