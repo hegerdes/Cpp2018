@@ -1,9 +1,9 @@
 #Ignore all Files in heare
 
 #CPP - Files
-.o
-.out
-.snip
+*.o
+*.out
+*.snip
 
 #Build Folder
 
