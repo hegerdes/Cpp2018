@@ -88,22 +88,10 @@ PathPlanner::PathPlanner (std::string mapfile)
             m_faces.push_back(std::stoi(word));
         }
     }
-    //print();
+    
+    print();
 
-    // for(map<string,int>::iterator it = m_planatdir.begin(); it !=m_planatdir.end(); ++it)
-    // {
-    //     cout << it->first << " " << it->second << endl;
-    // }
 
-    // for(std::vector<int>::iterator it = m_vertex.begin(); it !=m_vertex.end(); ++it)
-    // {
-    //     cout << *it << endl; 
-    // }
-
-    // for(std::vector<int>::iterator it = m_faces.begin(); it !=m_faces.end(); ++it)
-    // {
-    //     cout << *it << endl; 
-    // }
 
     mapstream.close();
     
