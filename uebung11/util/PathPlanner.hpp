@@ -6,9 +6,12 @@
 #include <map>
 #include <vector>
 #include <iomanip>
+#include <boost/graph/adjacency_list.hpp>
 #include "math/Vector.hpp"
 #include "SharedArray.hpp"
 
+
+using namespace boost;
 
 namespace asteroids
 {
@@ -16,6 +19,10 @@ namespace asteroids
 
 class PathPlanner {
   public:
+
+    typedef adjacency_list <vecS, vecS, undirectedS, property < vertex_name_t,
+    std::string >, property < edge_name_t, std::string > > Graph;
+
     /**
      * @brief Initialzes tha pathfinder with a filename, which contains information about the graph
      * 
@@ -44,14 +51,19 @@ class PathPlanner {
 
   private:
 
+    //The grath
+    Graph m_graph;
+
     //Number of Planets
     int m_numofindices;
 
     //Store tupel for faces
     std::vector<int> m_faces;
+    std::vector<Vector2i> m_edges;
 
     //store vertex
     std::vector<int> m_vertex;
+    std::vector<Vector3f> m_nkotes;
 
     //Map to match the Names to a Index
     std::map<std::string,int> m_planatdir;

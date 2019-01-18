@@ -3,19 +3,22 @@
 #include <math.h>
 #include <string>
 #include <fstream>
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
 
 #include "PathPlanner.hpp"
+
+using namespace boost;
 
 namespace asteroids
 {
 
-std::list<Vector<float> > PathPlanner::getPath(Vector<float> position, std::string s, std::string e)
+std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std::string e)
 {
     // TODO: Plan a path from s to e using the A* implementaion
     // of the Boost Graph Library. Add the positions of the 
     // visited nodes of the solution to this list.
-    std::list<Vector<float> > solutionPath;
-
+    std::list<Vector3f > solutionPath;
     return solutionPath;
 }
 
@@ -26,29 +29,38 @@ PathPlanner::PathPlanner (std::string mapfile)
     using std::map;
     using std::cout;
     using std::endl;
-/* 
-    //Open File
-    FILE* fp = fopen(mapfile.c_str(), "r");
 
-    if(fp == NULL)
-    {
-        cout << "PathPlanner: Unable to open file " << mapfile << endl;
-    }
+    // filesystem::path fileName(mapfile);
+	// filesystem::ifstream mapfilestream(fileName);
 
-    char line[100];
-	if(fgets(line, sizeof(line), fp) == NULL)
-	{
-		cout << "PathPlanner: Error reading line from file" << endl;
-	}
+    // if (!mapfilestream)
+	// {
+	// 	std::cerr << "No map file" << std::endl;
+	// 	//Exception?
+    //     return;
+	// }
 
-    m_numofindices = atoi(line);
+    // string readline;
+	// std::getline(mapfilestream, readline);
+	// int number_of_vertices;
+	// std::istringstream instring(readline);
+	// instring >> number_of_vertices;
 
-    cout << "PathPlanner: Num of elements " << m_numofindices << endl;
+    // for (int i = 0; i < number_of_vertices; i++)
+	// {
+	// 	std::getline(mapfilestream, readline);
+	// 	std::string star_name;
+	// 	float x, y, z;
+	// 	std::istringstream instring(readline);
+	// 	instring >> name >> x >> y >> z;
+	// 	// star_name[i] = name;
+	// 	// indexByName[name] = i;
+	// 	// positions[i]=Vertex3d(x,y,z);
+	// }
 
-    fclose(fp);
 
-    */ 
-
+    //Will be replces by boost functions but works by now
+    
     //Using streams to read
     std::fstream mapstream;
     mapstream.open(mapfile);
@@ -69,7 +81,6 @@ PathPlanner::PathPlanner (std::string mapfile)
         if(numplanet < m_numofindices)
         {
             //For names of the planet
-            //std::cout << word << std::endl;
             if(count % 4 == 0)
             {
                 m_planatdir.insert(std::pair<string,int>(word, numplanet));
