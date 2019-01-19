@@ -13,7 +13,7 @@
 #define __SpaceCraft_HPP__
 
 #include "TriangleMesh.hpp"
-//#include "TexturedMesh.hpp"
+#include "Bullet.hpp"
 #include "math/Vector.hpp"
 #include <SDL2/SDL.h>
 #include <list>
@@ -98,9 +98,18 @@ public:
      */
     bool hasMesh() const;
 
+    /**
+     * @brief Shoots a Bullet
+     * 
+     */
+    void shoot();
+
     Vector3f getPosition() const { return m_mesh->getPosition(); }
 
 private:
+
+    /// List of active bullets
+    std::list<Bullet::Ptr> m_bullets;
     /**
      * @brief Stop the current navigation;
      */

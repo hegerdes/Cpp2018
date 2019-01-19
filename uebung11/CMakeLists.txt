@@ -115,6 +115,7 @@ set(ASTEROID_SOURCES
     rendering/Renderable3D.cpp
     rendering/Circle.cpp
     rendering/Sphere.cpp
+    rendering/Bullet.cpp
     rendering/Texture.cpp
     rendering/TriangleMesh.cpp
     rendering/TexturedMesh.cpp

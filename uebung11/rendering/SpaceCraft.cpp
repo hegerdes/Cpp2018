@@ -59,6 +59,10 @@ void SpaceCraft::handleKeyInput(const Uint8* keyStates)
     {
         m_mesh->move(TriangleMesh::STRAFE, m_movespeed);
     }
+    if (keyStates[SDL_SCANCODE_SPACE])
+    {
+        shoot();
+    }
     if(keyStates[SDL_SCANCODE_N])
     {
         if(!m_autopilot)
@@ -76,6 +80,27 @@ void SpaceCraft::handleKeyInput(const Uint8* keyStates)
 void SpaceCraft::render()
 {
     m_mesh->render();
+
+    for(std::list<Bullet::Ptr>::iterator it = m_bullets.begin(); it != m_bullets.end(); ++it)
+    {
+        if(it->get()->isAlive())
+        {
+            it->get()->render();
+        }
+        else
+        {
+            it = m_bullets.erase(it);
+        }
+    }
+}
+
+void SpaceCraft::shoot()
+{
+    Bullet::Ptr b(new Bullet(m_mesh->getPosition(),m_mesh->getxAxis() * -1.0));
+
+    b->start();
+    
+    m_bullets.push_back(b);
 }
 
 void SpaceCraft::calculate(Vector3f dest)

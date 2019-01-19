@@ -59,7 +59,19 @@ public:
 	 */
 	void move(ACTION axis, float speed);
 
+    /**
+     * @brief Set the Position object
+     * 
+     * @param pos 
+     */
     void setPosition(const Vector3f& pos);
+
+    /**
+     * @brief Get the axis
+     * 
+     * @return Vector3f& 
+     */
+    Vector3f& getxAxis();
 
     Vector3f getPosition() const { return m_position; }
     Vector3f getXAxis() { return m_xAxis; }
