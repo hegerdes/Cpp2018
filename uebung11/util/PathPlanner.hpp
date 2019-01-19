@@ -63,7 +63,7 @@ class PathPlanner {
 
     //store vertex
     std::vector<int> m_vertex;
-    std::vector<Vector3f> m_nkotes;
+    std::vector<Vector3f> m_nodes;
 
     //Map to match the Names to a Index
     std::map<std::string,int> m_planatdir;

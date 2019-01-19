@@ -25,86 +25,64 @@ std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std:
 
 PathPlanner::PathPlanner (std::string mapfile) 
 {
-    using std::string;
     using std::map;
     using std::cout;
     using std::endl;
 
-    // filesystem::path fileName(mapfile);
-	// filesystem::ifstream mapfilestream(fileName);
+    //Filepointer
+    filesystem::path fileName(mapfile);
+	filesystem::ifstream mapfilestream(fileName);
 
-    // if (!mapfilestream)
-	// {
-	// 	std::cerr << "No map file" << std::endl;
-	// 	//Exception?
-    //     return;
-	// }
-
-    // string readline;
-	// std::getline(mapfilestream, readline);
-	// int number_of_vertices;
-	// std::istringstream instring(readline);
-	// instring >> number_of_vertices;
-
-    // for (int i = 0; i < number_of_vertices; i++)
-	// {
-	// 	std::getline(mapfilestream, readline);
-	// 	std::string star_name;
-	// 	float x, y, z;
-	// 	std::istringstream instring(readline);
-	// 	instring >> name >> x >> y >> z;
-	// 	// star_name[i] = name;
-	// 	// indexByName[name] = i;
-	// 	// positions[i]=Vertex3d(x,y,z);
-	// }
+    //Check file
+    if (!mapfilestream)
+	{
+		std::cerr << "No map file" << std::endl;
+		//Exception?
+        return;
+	}
 
 
-    //Will be replces by boost functions but works by now
-    
-    //Using streams to read
-    std::fstream mapstream;
-    mapstream.open(mapfile);
+    std::string readline;
+	std::getline(mapfilestream, readline);
+	int number_of_vertices;
+	std::istringstream instring(readline);
+	instring >> number_of_vertices;
 
-    string word;
-    mapstream >> word;
+    Graph g(number_of_vertices);
 
-    m_numofindices = std::stoi(word);
+    //Read Nodes
+    for (int i = 0; i < number_of_vertices; i++)
+	{
+		std::getline(mapfilestream, readline);
+		std::string star_name;
+		int x, y, z;
+		std::istringstream instring(readline);
+		instring >> star_name >> x >> y >> z;
 
-    //Output the number of planets
-    cout << "PathPlanner: Num of elements " << m_numofindices << endl;
-    
-    int count = 0;
-    int numplanet = 0;
-    //Parse File
-    while(mapstream >> word)
-    {
-        if(numplanet < m_numofindices)
-        {
-            //For names of the planet
-            if(count % 4 == 0)
-            {
-                m_planatdir.insert(std::pair<string,int>(word, numplanet));
-                numplanet++;
-            }
-            else
-            {   //Position of the planet x,y,z
-                m_vertex.push_back(std::stoi(word));
-                
-            }
-            count++;
-        }
-        else
-        {   
-            //Path between planets
-            m_faces.push_back(std::stoi(word));
-        }
-    }
-    
+        m_nodes.push_back(Vector3f(x,y,z));
+        m_planatdir.insert(std::pair<std::string,int>(star_name, i));
+	}
+
+    //Read Edges
+	for (std::string readline; std::getline(mapfilestream, readline);)
+	{
+		std::istringstream instring(readline);
+		int start, end;
+		instring >> start >> end;
+
+		float distance = m_nodes[start].dist(m_nodes[end]);
+        
+		// graph_traits<Graph>::edge_descriptor e;
+		// bool inserted;
+		// boost::tie(e, inserted) = add_edge(start, end, g);
+		// if (inserted)
+		// {
+		// 	distances[e] = distance;
+		// }
+	}
+
+
     print();
-
-
-
-    mapstream.close();
     
     // TODO: Parse file and build graph representation as 
     // for planning with BGL.
@@ -120,9 +98,9 @@ void PathPlanner::print()
     {
         std::cout << "Num: " << std::setw(2) << it->second << " Name: " 
             << std::left << std::setw(12) << it->first << " " << std::right 
-            << std::setw(5) << m_vertex[it->second * 3] << std::setw(5) << " " 
-            << m_vertex[it->second * 3 +1] << " " << std::setw(5) 
-            << m_vertex[it->second * 3 +2] << std::endl;
+            << std::setw(5) << std::endl;
+
+            m_nodes[it->second].printVector();
     }
 
 
