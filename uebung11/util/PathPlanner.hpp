@@ -7,6 +7,11 @@
 #include <vector>
 #include <iomanip>
 #include <boost/graph/adjacency_list.hpp>
+#include <boost/property_map/property_map.hpp>
+#include <boost/graph/astar_search.hpp>
+#include <boost/graph/breadth_first_search.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/config.hpp>
 #include "math/Vector.hpp"
 #include "SharedArray.hpp"
 
@@ -19,9 +24,6 @@ namespace asteroids
 
 class PathPlanner {
   public:
-
-    typedef adjacency_list <vecS, vecS, undirectedS, property < vertex_name_t,
-    std::string >, property < edge_name_t, std::string > > Graph;
 
     /**
      * @brief Initialzes tha pathfinder with a filename, which contains information about the graph
@@ -52,7 +54,7 @@ class PathPlanner {
   private:
 
     //The grath
-    Graph m_graph;
+    //Graph m_graph;
 
     //Number of Planets
     int m_numofindices;

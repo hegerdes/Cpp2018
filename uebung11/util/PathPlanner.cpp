@@ -41,14 +41,29 @@ PathPlanner::PathPlanner (std::string mapfile)
         return;
 	}
 
-
+    //Get number of elements
     std::string readline;
 	std::getline(mapfilestream, readline);
 	int number_of_vertices;
 	std::istringstream instring(readline);
 	instring >> number_of_vertices;
 
+
+    //Graph setup
+    typedef adjacency_list <vecS, vecS, undirectedS, property < vertex_name_t,
+    std::string >, property < edge_name_t, std::string > > Graph;
+
     Graph g(number_of_vertices);
+	
+    typedef property_map<Graph,vertex_name_t>::type star_name_map;
+    star_name_map star_name = get(vertex_name, g);
+
+    typedef property_map<Graph, vertex_name_t>::type star_dist_map;
+    star_dist_map star_dist = get(vertex_name, g);
+
+    typedef graph_traits < Graph >::vertex_descriptor Vertex;
+    typedef std::map <std::string, Vertex> NameVertexMap;
+    NameVertexMap stars;
 
     //Read Nodes
     for (int i = 0; i < number_of_vertices; i++)
