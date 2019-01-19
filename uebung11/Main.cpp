@@ -11,16 +11,17 @@
 
 #include "view/MainWindow.hpp"
 #include "util/PathPlanner.hpp"
+#include "math/Vector.hpp"
 
 int main(int argc, char** argv)
 {
 
 
     asteroids::PathPlanner searchPath("../models/01.map");
-    //searchPath.getPath(m_actor->getPosition(), start, end);
+    searchPath.getPath(asteroids::Vector3f(0,0,0), "Akis", "Argent");
     
-    //asteroids::MainWindow mainWindow("Asteroids", "../models/level.xml", "../models/01.map", "NewHope", "Akis", 1024, 768);
-    //mainWindow.execute();
+    asteroids::MainWindow mainWindow("Asteroids", "../models/level.xml", "../models/01.map", "NewHope", "Akis", 1024, 768);
+    mainWindow.execute();
 
     //TODO Redo the argc check
     // if(argc != 5)

@@ -68,7 +68,7 @@ class PathPlanner {
     std::vector<Vector3f> m_nodes;
 
     //Map to match the Names to a Index
-    std::map<std::string,int> m_planatdir;
+    std::map<std::string,int> m_planat_dir;
 
 
 
