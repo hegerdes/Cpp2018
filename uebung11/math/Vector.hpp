@@ -13,6 +13,7 @@
 #define __Vector_HPP__
 
 #include <iostream>
+#include <math.h>
 #include <cmath>
 
 namespace asteroids
@@ -38,6 +39,18 @@ public:
 	 * @brief   Normalize a Vector
 	 */
 	void normalize();
+
+	/**
+	 * @brief Prints the Vector
+	 * 
+	 */
+	void printVector();
+
+	/**
+	 * @brief Distance between two Vectors
+	 * 
+	 */
+	float dist(const Vector<T,L>& vec) const;
   
 	/**
 	 * @brief   Defines the vector addition
