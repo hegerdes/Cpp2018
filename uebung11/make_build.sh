@@ -38,7 +38,7 @@ else
         cd "$dir"
         make -j
     fi
-        ./asteroids ../models/
+        ./asteroids ../models/level.xml ../models/01.map NewHope Akis
     fi
 fi
 
