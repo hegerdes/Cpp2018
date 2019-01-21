@@ -3,14 +3,18 @@
 
 #include <string>
 #include <list>
+#include <math.h>
 #include <map>
 #include <vector>
 #include <iomanip>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/property_map/property_map.hpp>
 #include <boost/graph/astar_search.hpp>
+#include <boost/graph/random.hpp>
 #include <boost/graph/breadth_first_search.hpp>
+#include <boost/graph/graphviz.hpp>
 #include <boost/tuple/tuple.hpp>
+#include <boost/random.hpp>
 #include <boost/config.hpp>
 #include "math/Vector.hpp"
 #include "SharedArray.hpp"
@@ -24,6 +28,9 @@ namespace asteroids
 
 class PathPlanner {
   public:
+
+    typedef adjacency_list <listS, vecS, undirectedS, no_property, 
+    property < edge_weight_t, float > > Graph;
 
     /**
      * @brief Initialzes tha pathfinder with a filename, which contains information about the graph
@@ -54,7 +61,7 @@ class PathPlanner {
   private:
 
     //The grath
-    //Graph m_graph;
+    Graph g;
 
     //Number of Planets
     int m_numofindices;

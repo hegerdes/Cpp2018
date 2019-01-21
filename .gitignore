@@ -1,8 +1,5 @@
 #Ignore all Files in heare
 
-#File
-uebung11/kevin-beakon.cpp
-
 #CPP - Files
 *.o
 *.out
@@ -11,3 +8,13 @@ uebung11/kevin-beakon.cpp
 #Build Folder
 */Build/*
 */build/*
+
+
+#Test-Files
+*Test*.cpp
+*test*.cpp
+
+#Individual Files
+uebung11/kevin-beakon.cpp
+uebung11/test-astar-cities.dot
+uebung11/util/PathPlanner-Mrcel.cpp
