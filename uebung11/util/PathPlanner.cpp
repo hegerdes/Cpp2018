@@ -12,48 +12,6 @@ using namespace boost;
 namespace asteroids
 {
 
-<<<<<<< HEAD
-template <class Graph, class CostType, class Map>
-class distance_heuristic : public astar_heuristic<Graph, CostType>
-{
-public:
-  typedef typename graph_traits<Graph>::vertex_descriptor Vertex;
-  distance_heuristic(Map m, Vertex target): m_map(m), m_target(target) {}
-
-  CostType operator()(Vertex u)
-  {
-    CostType dx = m_map[m_target].x - m_map[u].x;
-    CostType dy = m_map[m_target].y - m_map[u].y;
-    CostType dz = m_map[m_target].z - m_map[u].z;
-    return std::sqrt(dx * dx + dy * dy + dz * dz);
-  }
-
-private:
-  Map m_map;
-
-  Vertex m_target;
-};
-
-
-struct found_goal {};
-
-template <class Vertex>
-class star_graph_visitor : public boost::default_astar_visitor
-{
-public:
-  star_graph_visitor(Vertex goal) : m_target(goal) {}
-
-  template <class Graph>
-  void examine_vertex(Vertex u, Graph& g) {
-    if(u == m_target)
-    {
-      throw found_goal();
-    }
-  }
-
-private:
-  Vertex m_target;
-=======
 // heuristic for graph
 template<class Graph, class CostType, class LocMap>
 class distance_heuristic : public astar_heuristic<Graph, CostType>
@@ -97,7 +55,6 @@ public:
     
 private:
 	Vertex m_goal;
->>>>>>> 105fc58b2e9a8e909e866bdb769f92e4dc85db03
 };
 
 std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std::string e)
@@ -113,53 +70,6 @@ std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std:
     std::vector<Graph::vertex_descriptor> p(num_vertices(g));
     std::vector<float> d(num_vertices(g));
 
-<<<<<<< HEAD
-    std::list<Vector3f > solutionPath;
-
-    //Graph setup
-    typedef adjacency_list <vecS, vecS, undirectedS, property < vertex_name_t,
-    std::string >, property < edge_name_t, std::string > > Graph;
-
-    Graph g(m_numofindices);
-
-    typedef graph_traits < Graph >::vertex_descriptor Vertex;
-
-    std::vector<Graph::vertex_descriptor> p(num_vertices(g));
-    std::vector<float> d(num_vertices(g));
-
-    try 
-    {
-        astar_search(g, start,
-            distance_heuristic<Graph, float, std::map<std::string,int> > (m_planat_dir, end),
-            predecessor_map(make_iterator_property_map(p.begin(), get(vertex_index, g))).
-            distance_map(make_iterator_property_map(d.begin(), get(vertex_index, g))).
-            visitor(star_graph_visitor<Vertex>(end)));
-        
-        /*  same as above (for testing other calls of astar_search) */
-        /*
-        astar_search(g, start,
-            distance_heuristic<Graph, float, std::map<std::string,int> > (m_planat_dir, end),
-            predecessor_map(make_iterator_property_map(p.begin(), get(vertex_index, g))).
-            distance_map(make_iterator_property_map(d.begin(), get(vertex_index, g))).
-            visitor(star_graph_visitor<Vertex>(end)));
-        */
-    } 
-    catch(found_goal fg) 
-    { 
-        for(Vertex v = end;; v = p[v]) 
-        {
-            solutionPath.push_front(v);
-            if(p[v] == v)
-            {
-                break;
-            }
-        }
-        std::cout << "Found a path from " << start << "to" << end << "!" << std::endl;
-        return solutionPath;
-    }
-    
-    std::cout << "Couldn't find a path from " << start << "to" << end << "!" << std::endl;
-=======
     std::cout << "Vor search" << std::endl;
 
     try {
@@ -187,7 +97,6 @@ std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std:
     std::cout << "Found no Goal" << std::endl;
     std::list<Vector3f > solutionPath;
     solutionPath.push_front(position);
->>>>>>> 105fc58b2e9a8e909e866bdb769f92e4dc85db03
     return solutionPath;
 }
 
@@ -199,8 +108,6 @@ PathPlanner::PathPlanner (std::string mapfile)
     //Filepointer
     filesystem::path fileName(mapfile);
 	filesystem::ifstream mapfilestream(fileName);
-
-    std::cout << fileName << std::endl;
 
     //Check file
     if (!mapfilestream)
