@@ -17,21 +17,20 @@ int main(int argc, char** argv)
 {
 
 
-    asteroids::PathPlanner searchPath("../models/01.map");
-    searchPath.getPath(asteroids::Vector3f(0,0,0), "Akis", "Argent");
+    // asteroids::PathPlanner searchPath("../models/01.map");
+    // searchPath.getPath(asteroids::Vector3f(0,0,0), "Akis", "Argent");
     
-    asteroids::MainWindow mainWindow("Asteroids", "../models/level.xml", "../models/01.map", "NewHope", "Akis", 1024, 768);
-    mainWindow.execute();
+    // asteroids::MainWindow mainWindow("Asteroids", "../models/level.xml", "../models/01.map", "NewHope", "Akis", 1024, 768);
+    // mainWindow.execute();
 
-    //TODO Redo the argc check
-    // if(argc != 5)
-    // {
-    //     std::cout << "Usage: ./astroids <xml-File> <map-File> <startnode> <endnode>" << std::endl; 
-    // }
-    // else
-    // {
-    //     asteroids::MainWindow mainWindow("Asteroids", argv[1], argv[2], argv[3], argv[4], 1024, 768);
-    // }
+    if(argc != 5)
+    {
+        std::cout << "Usage: ./astroids <xml-File> <map-File> <startnode> <endnode>" << std::endl; 
+    }
+    else
+    {
+        asteroids::MainWindow mainWindow("Asteroids", argv[1], argv[2], argv[3], argv[4], 1024, 768);
+    }
 
     return 0;
 }
