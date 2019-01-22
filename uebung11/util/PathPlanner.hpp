@@ -29,6 +29,7 @@ namespace asteroids
 class PathPlanner {
   public:
 
+    //Define Graph
     typedef adjacency_list <listS, vecS, undirectedS, no_property, 
     property < edge_weight_t, float > > Graph;
 

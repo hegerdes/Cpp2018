@@ -70,8 +70,6 @@ std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std:
     std::vector<Graph::vertex_descriptor> p(num_vertices(g));
     std::vector<float> d(num_vertices(g));
 
-    std::cout << "Vor search" << std::endl;
-
     try {
       //call astar named parameter interface
         astar_search(g, start, distance_heuristic<Graph, float, std::vector<Vector3f> >
@@ -91,6 +89,7 @@ std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std:
                 break;
             }
       }
+      return shortest_path;
     }
 
     //If there is no solution
@@ -105,68 +104,79 @@ PathPlanner::PathPlanner (std::string mapfile)
 {
     using std::map;
 
-    //Filepointer
-    filesystem::path fileName(mapfile);
-	filesystem::ifstream mapfilestream(fileName);
+    try
+    {
 
-    //Check file
-    if (!mapfilestream)
-	{
-		std::cerr << "No map file" << std::endl;
-		//Exception?
-        return;
-	}
+        //Filepointer
+        filesystem::path fileName(mapfile);
+        filesystem::ifstream mapfilestream(fileName);
 
-    //Get number of elements
-    std::string readline;
-	std::getline(mapfilestream, readline);
-	int number_of_vertices;
-	std::istringstream instring(readline);
-	instring >> number_of_vertices;
+        //Check file
+        if (!mapfilestream)
+        {
+            std::cerr << "No map file" << std::endl;
+            //Exception?
+            return;
+        }
 
-    Graph g(number_of_vertices);
+        //Get number of elements
+        std::string readline;
+        std::getline(mapfilestream, readline);
+        int number_of_vertices;
+        std::istringstream instring(readline);
+        instring >> number_of_vertices;
 
-    typedef property_map<Graph, edge_weight_t>::type star_dist_map_t;
-    star_dist_map_t star_dist = get(edge_weight, g);
+        Graph g(number_of_vertices);
 
-    typedef graph_traits <Graph>::vertex_descriptor Vertex;
-    typedef std::map <std::string, Vertex> NameVertexMap;
-    NameVertexMap stars;
+        typedef property_map<Graph, edge_weight_t>::type star_dist_map_t;
+        star_dist_map_t star_dist = get(edge_weight, g);
 
-    //Read Nodes
-    for (int i = 0; i < number_of_vertices; i++)
-	{
-		std::getline(mapfilestream, readline);
-		std::string strname;
-		int x, y, z;
-		std::istringstream instring(readline);
-		instring >> strname >> x >> y >> z;
+        typedef graph_traits <Graph>::vertex_descriptor Vertex;
+        typedef std::map <std::string, Vertex> NameVertexMap;
+        NameVertexMap stars;
 
-        //star_name[i] = strname;
-        m_nodes.push_back(Vector3f(x,y,z));
-        m_planat_dir.insert(std::pair<std::string,int>(strname, i));
-	}
+        //Read Nodes
+        for (int i = 0; i < number_of_vertices; i++)
+        {
+            std::getline(mapfilestream, readline);
+            std::string strname;
+            int x, y, z;
+            std::istringstream instring(readline);
+            instring >> strname >> x >> y >> z;
 
-    //Read Edges
-	for (std::string readline; std::getline(mapfilestream, readline);)
-	{
-		std::istringstream instring(readline);
-		int start, end;
-		instring >> start >> end;
+            //star_name[i] = strname;
+            m_nodes.push_back(Vector3f(x,y,z));
+            m_planat_dir.insert(std::pair<std::string,int>(strname, i));
+        }
 
-		float distance = m_nodes[start].dist(m_nodes[end]);
+        //Read Edges
+        for (std::string readline; std::getline(mapfilestream, readline);)
+        {
+            std::istringstream instring(readline);
+            int start, end;
+            instring >> start >> end;
 
-        //graph_traits<Graph>::edge_descriptor e;
-        Graph::edge_descriptor e;
+            float distance = m_nodes[start].dist(m_nodes[end]);
+            std::cout << "Distance: " << distance << std::endl;
 
-		bool inserted;
-		boost::tie(e, inserted) = add_edge(start, end, g);
-		if (inserted)
-		{
-            //lstd::cout << "Füge Edge ein" << std::endl;
-            star_dist[e] = distance;
-		}
-	}
+            //graph_traits<Graph>::edge_descriptor e;
+            Graph::edge_descriptor e;
+
+            bool inserted;
+            boost::tie(e, inserted) = add_edge(start, end, g);
+            if (inserted)
+            {
+                //lstd::cout << "Füge Edge ein" << std::endl;
+                star_dist[e] = distance;
+            }
+        }
+
+    }
+    catch (filesystem::filesystem_error &e)
+    {
+        std::cout << "Can not read form PathFile" << std::endl;
+        //throw std::ios_base::failure("Unable to read file");
+    }
 }
 
 void PathPlanner::print()
@@ -181,8 +191,6 @@ void PathPlanner::print()
 
             m_nodes[it->second].printVector();
     }
-
-
 }
     
 }
