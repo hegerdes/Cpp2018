@@ -4,6 +4,14 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "BuildScript",
+            "type": "shell",
+            "command": "./make_build debug",
+            "group": "build",
+            "options": {
+                "cwd": "${fileDirname}"},
+        },
+        {
             "label": "MakeBuild",
             "type": "shell",
             "command": "make -j",

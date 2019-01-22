@@ -11,7 +11,7 @@
             "program": "${fileDirname}/build/asteroids",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${fileDirname}/build",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
