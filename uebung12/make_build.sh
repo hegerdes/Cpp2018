@@ -28,7 +28,7 @@ else
         fi
         rm "$dir" -r
     fi
-    if [ "$1" = "lunch" ]; then
+    if [ "$1" = "launch" ]; then
         if [ ! -d "$dir" ]; then
         mkdir build
         cd build
