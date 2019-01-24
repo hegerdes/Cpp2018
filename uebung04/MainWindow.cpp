@@ -80,7 +80,7 @@ MainWindow::MainWindow(
 	glMatrixMode(GL_MODELVIEW);
 
 	model = new Model(plyname);
-	camera = new Camera(Vector(-20.0,0.0,-40.0), 1.0, 5.0);
+	camera = new Camera(Vector(0.0f,0.0f,-700.0f), 1.0, 5.0);
 }
 
 void MainWindow::execute()
@@ -120,10 +120,9 @@ void MainWindow::execute()
 					}                         
 					break;          
 			}
-			camera->apply();
-			model->render();
-			
 		}
+		camera->apply();
+		model->render();
 
 		/* Bring up back buffer */
 		SDL_GL_SwapWindow(mainWindow);
