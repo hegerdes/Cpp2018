@@ -28,6 +28,7 @@ void PhysicsEngine::addDestroyable(std::shared_ptr<PhysicalObject>& obj)
 void PhysicsEngine::addBullet(Bullet::Ptr& bullet)
 {
     // Add an bullet to the list of active bullets
+    m_bullets.push_back(bullet);
 }
 
 void PhysicsEngine::process()
