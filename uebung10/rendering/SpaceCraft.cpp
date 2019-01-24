@@ -91,7 +91,7 @@ void SpaceCraft::render()
         }
         else
         {
-            //it = m_bullets.erase(it, m_bullets.end());
+            it = m_bullets.erase(it);
         }
     }
 }
@@ -111,12 +111,7 @@ void SpaceCraft::shoot()
 }
 
 SpaceCraft::~SpaceCraft()
-{
-    for(auto th:m_bullets)
-    {
-        th->stop();
-    }
- 
+{ 
 }
 
 } // namespace asteroids
