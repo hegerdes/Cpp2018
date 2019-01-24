@@ -111,6 +111,7 @@ set(ASTEROID_SOURCES
     math/Quaternion.cpp
     math/Randomizer.cpp
     Main.cpp
+    physics/PhysicalObject.cpp
     physics/Transformable.cpp
     physics/PhysicsEngine.cpp
     physics/ParticleEngine.cpp
