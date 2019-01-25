@@ -21,15 +21,23 @@ namespace asteroids
 /**
  * @brief   Class to render particle effects
  */
-class PhysicalObject : public Renderable, Transformable
+class PhysicalObject : public Transformable, public Renderable
 {
 public:
 
     /**
-     * @brief Render the object
+     * @brief Construct a new Physical Object object
      * 
+     * @param position 
+     * @param bound_radius 
      */
-    void render();
+    PhysicalObject(const Vector3f& position, const float bound_radius);
+
+    PhysicalObject() = delete;
+
+    virtual ~PhysicalObject() = default;
+
+    virtual void render() override;
 
     /**
      * @brief Returns if a collison between two objects happen 

@@ -13,5 +13,20 @@
 namespace asteroids
 {
 
+PhysicalObject::PhysicalObject(const Vector3f& pos, const float bound_radius):
+    m_radius(bound_radius)
+{
+    m_position = pos;
+}
+
+void PhysicalObject::render()
+{
+
+}
+
+bool PhysicalObject::collision(PhysicalObject::Ptr& p)
+{
+    return true;
+}
 
 }//asteroids
