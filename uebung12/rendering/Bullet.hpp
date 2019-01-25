@@ -16,6 +16,7 @@
 #include "TriangleMesh.hpp"
 #include "Sphere.hpp"
 #include "Renderable3D.hpp"
+#include "../physics/PhysicalObject.hpp"
 
 #include <thread>
 #include <chrono>
