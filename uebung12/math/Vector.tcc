@@ -27,6 +27,16 @@ Vector<T, L>::Vector(T x, T y, T z)
 }
 
 template<typename T, int L>
+Vector<T,L>::Vector(const Vector<T,L>& vec)
+{
+	static_assert(L >= 1 && L <= 3, "Vector legth outside (1,3)");
+	for(int i = 0; i < L; i++)
+	{
+		m[i] = vec.m[i];
+	}
+}
+
+template<typename T, int L>
 void Vector<T, L>::normalize()
 {
 	T mag2 = 0;

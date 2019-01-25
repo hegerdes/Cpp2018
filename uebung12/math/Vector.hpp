@@ -32,6 +32,8 @@ public:
 	 */
 	Vector(T x = 0, T y = 0, T z = 0);
 
+	Vector(const Vector<T,L>& vec);
+
 	/**
 	 * @brief   Normalize a Vector
 	 */
