@@ -25,6 +25,33 @@ class PhysicalObject : public Renderable, Transformable
 {
 public:
 
+    /**
+     * @brief Render the object
+     * 
+     */
+    void render();
+
+    /**
+     * @brief Returns if a collison between two objects happen 
+     * 
+     * @param p 
+     * @return true 
+     * @return false 
+     */
+    bool collision(PhysicalObject::Ptr& p);
+
+
+private:
+
+    //radius of the bounding ball
+    float m_radius;
+
+    //The renderable
+    Renderable::Ptr m_renderable;
+
+
+
+
 };
 
 }//asteroids
