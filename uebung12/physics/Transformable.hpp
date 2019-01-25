@@ -140,23 +140,23 @@ protected:
     /**
      * @brief   The current orientation of the x axis
      */
-    Vector<float>    m_xAxis;
+    Vector3f    m_xAxis;
 
     /**
      * @brief   The current orientation of the y axis
      */
-    Vector<float>    m_yAxis;
+    Vector3f   m_yAxis;
 
     /**
      * @brief   The current orientation of the z axis
      */
-    Vector<float>    m_zAxis;
+    Vector3f    m_zAxis;
 
 
     /**
      * @brief   The current position of the mesh object
      */
-    Vector<float>    m_position;
+    Vector3f    m_position;
 
     /**
      * @brief   A quaternion representing the current rotation
