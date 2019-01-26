@@ -30,6 +30,7 @@ int main(int argc, char** argv)
     else
     {
         asteroids::MainWindow mainWindow("Asteroids", argv[1], argv[2], argv[3], argv[4], 1024, 768);
+        mainWindow.execute();
     }
 
     return 0;
