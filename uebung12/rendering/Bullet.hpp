@@ -28,7 +28,7 @@ namespace asteroids
 /**
  * @brief Renders a Bullet
  */
-class Bullet: public Renderable3D
+class Bullet: public PhysicalObject
 {
 
 public:
