@@ -13,10 +13,9 @@
 namespace asteroids
 {
 
-PhysicalObject::PhysicalObject(const Vector3f& pos, const float bound_radius):
+PhysicalObject::PhysicalObject(const float bound_radius):
     m_radius(bound_radius)
 {
-    m_position = pos;
     m_renderable = std::make_shared<Sphere>(Vector3f(2,1,3),3);
 }
 

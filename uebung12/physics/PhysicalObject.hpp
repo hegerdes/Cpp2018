@@ -34,7 +34,7 @@ public:
      * @param position 
      * @param bound_radius 
      */
-    PhysicalObject(const Vector3f& position, const float bound_radius);
+    PhysicalObject(const float bound_radius);
 
     PhysicalObject() = delete;
 
