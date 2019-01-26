@@ -68,11 +68,9 @@ class PathPlanner {
     int m_numofindices;
 
     //Store tupel for faces
-    std::vector<int> m_faces;
     std::vector<Vector2i> m_edges;
 
     //store vertex
-    std::vector<int> m_vertex;
     std::vector<Vector3f> m_nodes;
 
     //Map to match the Names to a Index

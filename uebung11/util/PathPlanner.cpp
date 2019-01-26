@@ -82,8 +82,9 @@ std::list<Vector3f > PathPlanner::getPath(Vector3f position, std::string s, std:
     {
         std::cout << "Found Goal" << std::endl; 
         std::list<Vector3f> shortest_path;
+        shortest_path.push_front(position);
         for(vertex v = goal;; v = p[v]) {
-            shortest_path.push_front(v);
+            shortest_path.push_front(m_nodes[v]);
             if(p[v] == v)
             {
                 break;
@@ -126,8 +127,6 @@ PathPlanner::PathPlanner (std::string mapfile)
         std::istringstream instring(readline);
         instring >> number_of_vertices;
 
-        Graph g(number_of_vertices);
-
         typedef property_map<Graph, edge_weight_t>::type star_dist_map_t;
         star_dist_map_t star_dist = get(edge_weight, g);
 
@@ -157,7 +156,6 @@ PathPlanner::PathPlanner (std::string mapfile)
             instring >> start >> end;
 
             float distance = m_nodes[start].dist(m_nodes[end]);
-            std::cout << "Distance: " << distance << std::endl;
 
             //graph_traits<Graph>::edge_descriptor e;
             Graph::edge_descriptor e;
