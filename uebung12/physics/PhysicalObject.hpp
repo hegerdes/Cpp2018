@@ -12,6 +12,7 @@
 #define PHYSICALOBJECT_HPP
 
 #include "../rendering/Renderable.hpp"
+#include "../rendering/Sphere.hpp"
 #include "Transformable.hpp"
 
 
@@ -25,6 +26,8 @@ class PhysicalObject : public Transformable, public Renderable
 {
 public:
 
+    using Ptr = std::shared_ptr<PhysicalObject>; 
+
     /**
      * @brief Construct a new Physical Object object
      * 
@@ -35,30 +38,37 @@ public:
 
     PhysicalObject() = delete;
 
+    /**
+     * @brief Destroy the Physical Object object
+     * 
+     */
     virtual ~PhysicalObject() = default;
 
+    /**
+     * @brief virtual render
+     * 
+     */
     virtual void render() override;
 
     /**
      * @brief Returns if a collison between two objects happen 
+     * Gets distance between both positions and checks if distance
+     * is smaller than the combind radius
      * 
-     * @param p 
-     * @return true 
-     * @return false 
+     * @param p The other PhysicalObject
+     * @return true If collision happend
+     * @return false If not
      */
     bool collision(PhysicalObject::Ptr& p);
 
 
-private:
+protected:
 
     //radius of the bounding ball
     float m_radius;
 
     //The renderable
     Renderable::Ptr m_renderable;
-
-
-
 
 };
 
