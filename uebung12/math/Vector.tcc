@@ -126,5 +126,18 @@ void Vector<T, L>::operator+=(const Vector<T, L>& v)
 		m[i] += v.m[i];
 	}
 }
+
+template<typename T, int L>
+T Vector<T, L>::dist(const Vector<T, L> &vec) const
+{
+	float dist = 0;
+	for(int i = 0; i < L; i++)
+	{
+		dist += pow(this->m[i] - vec.m[i], 2);
+	}
+
+	return std::sqrt(dist);
+
+}
     
 } // namespace asteroids

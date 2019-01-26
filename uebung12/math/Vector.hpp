@@ -87,6 +87,14 @@ public:
 	 */
 	void operator+= (const Vector<T, L>& v);
 
+	/**
+	 * @brief Calcs euclidian distance
+	 * 
+	 * @param vec other vector
+	 * @return T distance
+	 */
+	T dist(const Vector<T,L>& vec)const;
+
 	template<typename _T, int _L>
 	friend std::ostream& operator<<(std::ostream&, const Vector<_T, _L>&);
 
