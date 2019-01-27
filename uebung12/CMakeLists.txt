@@ -153,6 +153,8 @@ set(ASTEROID_DEPENDS
 ###############################################################################
 
 add_executable(asteroids ${ASTEROID_SOURCES} ${C3DSREADER_SOURCES})
+add_executable(traits Aufgabe1/Traits.cpp)
+add_executable(foo Aufgabe1/Foo.cpp)
 
 ###############################################################################
 # External library dependencys
