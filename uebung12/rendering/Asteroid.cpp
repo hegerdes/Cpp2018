@@ -23,7 +23,7 @@ Asteroid::Asteroid(
     float rotation,
     float speed,
     float accell,
-    float radius)
+    float radius):PhysicalObject(10)
 {
 
     //Randomize Heading
@@ -46,7 +46,7 @@ Asteroid& Asteroid::operator=( Asteroid& other )
 }
 
 
-Asteroid::Asteroid(const Asteroid& other)
+Asteroid::Asteroid(const Asteroid& other):PhysicalObject(20)
 {
 	copy(other);
 }

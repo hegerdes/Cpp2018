@@ -15,6 +15,7 @@
 #include "TexturedMesh.hpp"
 #include "io/TriangleMeshFactory.hpp"
 #include "rendering/Renderable3D.hpp"
+#include "../physics/PhysicalObject.hpp"
 
 
 // Std C++ includes
@@ -26,7 +27,7 @@ namespace asteroids
 /**
  * @brief  Representation of an asteroid
  */
-class Asteroid : public Renderable3D
+class Asteroid : public PhysicalObject
 {
 public:
     using Ptr = std::shared_ptr<Asteroid>; 
