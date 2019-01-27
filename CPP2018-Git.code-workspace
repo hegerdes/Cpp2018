@@ -58,7 +58,9 @@
 			"complex": "cpp",
 			"unordered_set": "cpp",
 			"slist": "cpp",
-			"valarray": "cpp"
+			"valarray": "cpp",
+			"csignal": "cpp",
+			"numeric": "cpp"
 		}
 	}
 }

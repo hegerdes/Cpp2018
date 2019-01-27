@@ -145,7 +145,15 @@ MainWindow::MainWindow(
 
     // Init physics engine and add all asteroids
     std::list<Asteroid::Ptr> asteroids;
+
+    m_asteroidField->getAsteroids(asteroids);
+
     m_physicsEngine = make_shared<PhysicsEngine>();
+
+    for(std::list<Asteroid::Ptr>::iterator it = asteroids.begin(); it != asteroids.end(); ++it)
+    {
+        //m_physicsEngine->addDestroyable(static_cast<PhysicsEngine>((*it)));
+    }
 
    ///////////////////////////////////////////////////////////////
    /// TODO:

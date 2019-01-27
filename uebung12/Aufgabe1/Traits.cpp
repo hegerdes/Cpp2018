@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <type_traits>
 
 /// A struct to represent a vertex position
 template<typename T>
@@ -61,6 +62,21 @@ void print_vertex(T& vertex)
 	// safely access the color information of the
 	// vertex type (only if supported!) and print
 	// position and color if present
+
+	if(VertexTraits<T>::HasColor)
+	{
+		std::cout << "Has color" << std::endl;
+		//ColorVertex cv = static_cast<ColorVertex>(vertex);
+		std::cout << "Koordinaten x, y, z: \n " << vertex.m_x << vertex.m_y << vertex.m_z  
+			<< std::endl;
+			//"\nColor: " << vertex.m_r << vertex.m_g << vertex.m_b <<std::endl;
+	}else
+	{
+		std::cout << "Koordinaten x, y, z: \n " << vertex.m_x << vertex.m_y << vertex.m_z 
+			<<std::endl;
+	}
+	
+
 
 }
 
