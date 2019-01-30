@@ -66,10 +66,10 @@ void print_vertex(T& vertex)
 	if(VertexTraits<T>::HasColor)
 	{
 		std::cout << "Has color" << std::endl;
-		//ColorVertex cv = static_cast<ColorVertex>(vertex);
+		ColorVertex* cv = (ColorVertex*) &vertex;
+		
 		std::cout << "Koordinaten x, y, z: \n " << vertex.m_x << vertex.m_y << vertex.m_z  
-			<< std::endl;
-			//"\nColor: " << vertex.m_r << vertex.m_g << vertex.m_b <<std::endl;
+			<< "\nColor: " << cv->m_r << cv->m_g << cv->m_b <<std::endl;
 	}else
 	{
 		std::cout << "Koordinaten x, y, z: \n " << vertex.m_x << vertex.m_y << vertex.m_z 
