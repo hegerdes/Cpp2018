@@ -43,6 +43,7 @@ void PhysicsEngine::process()
 
     for(it_b = m_bullets.begin(); it_b != m_bullets.end(); ++it_b)
     {
+        (*it_b)->run();
         for(it_m = m_objects.begin(); it_m != m_objects.end(); ++it_m)
         {
             if((*it_b)->collision(*it_m))

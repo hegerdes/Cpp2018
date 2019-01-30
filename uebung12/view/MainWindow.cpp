@@ -150,9 +150,10 @@ MainWindow::MainWindow(
 
     m_physicsEngine = make_shared<PhysicsEngine>();
 
-    for(std::list<Asteroid::Ptr>::iterator it = asteroids.begin(); it != asteroids.end(); ++it)
+    for(auto it = asteroids.begin(); it != asteroids.end(); it++)
     {
-        //m_physicsEngine->addDestroyable(static_cast<PhysicsEngine>((*it)));
+        PhysicalObject::Ptr p = std::static_pointer_cast<PhysicalObject>((*it));
+        m_physicsEngine->addDestroyable(p);
     }
 
    ///////////////////////////////////////////////////////////////
