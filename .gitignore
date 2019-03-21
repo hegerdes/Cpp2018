@@ -4,8 +4,10 @@
 *.o
 *.out
 *.snip
+*.bin
 
 #Build Folder
+*.vscode/
 */Build/*
 */build/*
 
