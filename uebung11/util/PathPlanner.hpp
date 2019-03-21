@@ -61,7 +61,7 @@ class PathPlanner {
 
   private:
 
-    //The grath
+    //The graph
     Graph g;
 
     //Number of Planets
