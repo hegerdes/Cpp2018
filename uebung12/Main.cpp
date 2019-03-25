@@ -13,9 +13,10 @@
 
 int main(int argc, char** argv)
 {
-    asteroids::MainWindow mainWindow("Asteroidsd", argv[1], 1024, 768);
-    mainWindow.execute();
+    asteroids::MainWindow mainWindows("Asteroids", argv[1], 1024, 768);
+    mainWindows.execute();
 
-    //Other stuff
+    //Das ist ein Test
+
     return 0;
 }
