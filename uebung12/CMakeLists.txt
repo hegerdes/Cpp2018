@@ -162,3 +162,7 @@ add_executable(foo Aufgabe1/Foo.cpp)
 
 message(STATUS ${GLUT_LIBRARY} ${GLEW_LIBRARIES} ${SDL2_LIBRARY})
 target_link_libraries(asteroids ${ASTEROID_DEPENDS})
+
+###############################################################################
+# EOF
+###############################################################################
